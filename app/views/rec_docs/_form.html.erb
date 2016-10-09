@@ -1,0 +1,46 @@
+<%= form_for(rec_doc) do |f| %>
+  <% if rec_doc.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(rec_doc.errors.count, "error") %> prohibited this rec_doc from being saved:</h2>
+
+      <ul>
+      <% rec_doc.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+  <div class="field">
+    <%= f.label :收文日期 %>
+    <%= f.date_select :riqi %>
+  </div>
+
+  <div class="field">
+    <%= f.number_field :year ,value:Time.now.year%>年 <%= f.number_field :year_num ,value:@this_year_num%>号
+  </div>
+
+
+
+  <div class="field">
+    <%= f.label :文件来源 %>
+    <%= f.text_field :from %>
+  </div>
+
+  <div class="field">
+    <%= f.label :来源编号 %>
+    <%= f.text_field :from_code %>
+  </div>
+
+  <div class="field">
+    <%= f.label :文件内容 %>
+    <%= f.text_area :wjnr %>
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

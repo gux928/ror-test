@@ -1,0 +1,68 @@
+
+
+<!-- <h1>print</h1>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <%= @rec_doc.year %>年［<%= @rec_doc.year_num %>］号
+</p>
+
+<p>
+  <strong>收文日期:</strong>
+  <%= @rec_doc.riqi %>
+</p>
+
+<p>
+  <strong>文件来源:</strong>
+  <%= @rec_doc.from %>
+</p>
+
+<p>
+  <strong>来源编号:</strong>
+  <%= @rec_doc.from_code %>
+</p>
+
+<p>
+  <strong>文件内容:</strong>
+  <%= @rec_doc.wjnr %>
+</p>
+
+<%= link_to 'Edit', edit_rec_doc_path(@rec_doc) %> |
+<%= link_to 'Back', rec_docs_path %> -->
+<div class="tab-div" align="center">
+   <table >
+      <tr>
+   <th colspan="2">扬州市直管公房管理处办公室收文单
+   </th>
+     </tr>
+   <tr>
+     <td colspan="2" class="noborder gao1 right"> 收文编号:收文<%= @rec_doc.year %>年［<%= @rec_doc.year_num %>］号</td>
+   </tr>
+
+   <tr>
+     <td rowspan="2" class="lwdw"> 来文单位:<br> <%= @rec_doc.from %></td>
+     <td class="left gao2 top"> 收文日期: <%= @rec_doc.riqi %></td>
+   </tr>
+
+   <tr>
+     <td class="gao3 top left"> 文件编号: <br>   <%= @rec_doc.from_code %></td>
+   </tr>
+   <tr>
+     <td  class="gao4 top left" colspan="2" > 文件内容:<br><br><span class="wz">  <%= @rec_doc.wjnr %></span></td>
+   </tr>
+   <tr>
+     <td  class="gao4 top left" colspan="2" > 拟办意见:</td>
+   </tr>
+   <tr>
+     <td class="gao4 top left" colspan="2" > 领导批示和会办意见：</td>
+   </tr>
+ </table>
+
+   <div class="button-div diss" align="center">
+   <input type="button" value="关闭窗口" class="button diss" onclick="javascript:window.close();"/>
+   <input type="button" value="打印" class="button diss" onclick="javascript:window.print();"/>
+   </div>
+ </form>
+ </div>
+</body>

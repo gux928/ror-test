@@ -1,0 +1,1 @@
+json.partial! "rec_docs/rec_doc", rec_doc: @rec_doc

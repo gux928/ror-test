@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Rec Docs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Wjnr</th>
+      <th>Riqi</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rec_docs.each do |rec_doc| %>
+      <tr>
+        <td><%= rec_doc.wjnr %></td>
+        <td><%= rec_doc.riqi %></td>
+        <td><%= link_to 'Show', rec_doc %></td>
+        <td><%= link_to 'Edit', edit_rec_doc_path(rec_doc) %></td>
+        <td><%= link_to 'Destroy', rec_doc, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rec Doc', new_rec_doc_path %>

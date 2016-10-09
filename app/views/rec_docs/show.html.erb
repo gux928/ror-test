@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <%= @rec_doc.year %>年［<%= @rec_doc.year_num %>］号
+</p>
+
+<p>
+  <strong>收文日期:</strong>
+  <%= @rec_doc.riqi %>
+</p>
+
+<p>
+  <strong>文件来源:</strong>
+  <%= @rec_doc.from %>
+</p>
+
+<p>
+  <strong>来源编号:</strong>
+  <%= @rec_doc.from_code %>
+</p>
+
+<p>
+  <strong>文件内容:</strong>
+  <%= @rec_doc.wjnr %>
+</p>
+
+<%= link_to 'Edit', edit_rec_doc_path(@rec_doc) %> |
+<%= link_to 'Back', rec_docs_path %>

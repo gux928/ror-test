@@ -1,0 +1,1 @@
+json.array! @rec_docs, partial: 'rec_docs/rec_doc', as: :rec_doc
