@@ -10,21 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160826102232) do
+ActiveRecord::Schema.define(version: 20161029075313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "rec_docs", force: :cascade do |t|
     t.text     "wjnr"
-    t.date "riqi"
+    t.date     "riqi"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "from"
     t.string   "from_code"
-    t.string   "pic_file_name"
     t.integer  "year"
     t.integer  "year_num"
+    t.integer  "doc_type"
+    t.string   "tiff"
+    t.integer  "png_num"
   end
 
 end

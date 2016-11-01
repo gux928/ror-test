@@ -13,7 +13,12 @@
 !/log/.keep
 !/tmp/.keep
 
+
 # Ignore Byebug command history file.
 .byebug_history
 
 /.vscode
+/upload/*
+/public/*
+/config/datebase.yml
+/config/secrets.yml

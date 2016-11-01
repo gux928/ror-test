@@ -14,5 +14,9 @@ module TestPg
     config.time_zone = 'Asia/Shanghai'
 
     config.active_record.default_timezone = :local
+
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance|
+      "<div class=\"has-error\">#{html_tag}</div>".html_safe
+    }
   end
 end

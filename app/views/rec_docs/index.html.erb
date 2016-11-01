@@ -1,29 +1,53 @@
-<p id="notice"><%= notice %></p>
+<!-- <%= stylesheet_link_tag "rec_docs" %> -->
 
-<h1>Rec Docs</h1>
+<%= search_form_for @q do |f| %>
+<div class="row">
+    <div class="form-group col-md-6 col-md-offset-2">
+        <%= f.search_field :from_or_from_code_or_wjnr_cont,class:"form-control",placeholder:"在此输入您要搜索的关键字" %>
+    </div>
+    <button type="submit" class="btn btn-deault col-md-2 ">搜索</button>
+</div>
+<% end %>
+<div class="row text-center">
+    <!-- <%= will_paginate @rec_docs %> -->
+    <%= will_paginate @rec_docs, renderer: BootstrapPagination::Rails %>
+</div>
+<table class="table table-striped">
 
-<table>
-  <thead>
-    <tr>
-      <th>Wjnr</th>
-      <th>Riqi</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <thead>
+        <tr >
+            <th class="col-xs-2">收文编号</th>
+            <th class="text-center col-xs-6">文件内容</th>
+            <th class="text-center col-xs-1"><%= sort_link(@q, :from,"文件来源") %></th>
+            <th class="text-center col-xs-2"><%= sort_link(@q, :from_code,"来源文号") %></th>
 
-  <tbody>
-    <% @rec_docs.each do |rec_doc| %>
-      <tr>
-        <td><%= rec_doc.wjnr %></td>
-        <td><%= rec_doc.riqi %></td>
-        <td><%= link_to 'Show', rec_doc %></td>
-        <td><%= link_to 'Edit', edit_rec_doc_path(rec_doc) %></td>
-        <td><%= link_to 'Destroy', rec_doc, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
+            <th><%= sort_link(@q, :riqi,"收文日期") %></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @rec_docs.each do |rec_doc| %>
+        <tr>
+            <td>
+              <% if rec_doc.doc_type != 1 %>
+              收文<%= rec_doc.year %>［<%= rec_doc.year_num %>］号
+          <% else %>
+              信访<%= rec_doc.year %>［<%= rec_doc.year_num %>］号
+              <% end %>
+            </td>
+            <td><%= link_to rec_doc.wjnr, rec_doc %></td>
+            <td><%= rec_doc.from %></td>
+            <td><%= rec_doc.from_code %></td>
+            <td><%= rec_doc.riqi %></td>
+            <!-- <td><%= link_to 'Show', rec_doc %></td>
+                    <td><%= link_to 'Edit', edit_rec_doc_path(rec_doc) %></td>
+                    <td><%= link_to 'Destroy', rec_doc, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+        </tr>
+        <% end %>
+    </tbody>
+
 </table>
-
-<br>
-
-<%= link_to 'New Rec Doc', new_rec_doc_path %>
+<div class="row text-center">
+    <!-- <%= will_paginate @rec_docs %> -->
+    <%= will_paginate @rec_docs, renderer: BootstrapPagination::Rails %>
+</div>

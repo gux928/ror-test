@@ -12,3 +12,7 @@ Rails.application.config.assets.version = '1.0'
 
 
 # Rails.application.config.assets.precompile += %w( print2.css )
+
+Rails.application.config.assets.precompile += %w( rec_docs.css )
+Rails.application.config.assets.precompile += %w( print.css )
+Rails.application.config.assets.precompile += %w( lightbox.min.js lightbox.min.css )

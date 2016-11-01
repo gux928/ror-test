@@ -1,0 +1,37 @@
+
+<div>
+    <%= image_tag "logo.png", class: "col-xs-8 col-xs-offset-2" ,id:"logo-img"%>
+</div>
+
+<%#<form action="search.html" method="get" enctype="multipart/form-data">
+  <div class="offset2 input-control text col-md-8">
+    <input type="text" name="keywords" id="keywords"/>
+    <button class="btn-search"></button>
+  </div>
+</form>%>
+<!-- <div>
+<form role="form">
+  <div class="form-group col-md-6 col-md-offset-3">
+  <input type="text" class="form-control" id="keywords" placeholder="在此输入您要搜索的关键字">
+</div>
+  <button type="submit" class="btn btn-deault col-md-2 col-md-offset-5">搜索</button>
+</form>
+</div> -->
+
+<%= search_form_for @q do |f| %>
+
+<div class="form-group col-xs-6 col-xs-offset-3">
+    <%= f.search_field :from_or_from_code_or_wjnr_cont,class:"form-control",placeholder:"在此输入您要搜索的关键字" %>
+</div>
+<button type="submit" class="btn btn-deault col-xs-2 col-xs-offset-5">搜索</button>
+
+<% end %>
+
+<!--<div class="nav-tabs sapn12">
+
+    <a class="button first default bg-color-blue span6">最近收文</a>
+
+    <a class="button last span6">最近信访</a>
+</div>
+<div class="tab-content span12" id="recent">
+</div>-->
