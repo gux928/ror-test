@@ -21,6 +21,9 @@ class RecDocsController < ApplicationController
   def show
     # @page_num=0
     @png_exist=set_png
+    p "****************"
+    p @rec_doc.tiff
+    p "****************"
   end
 
   # GET /rec_docs/new
@@ -109,7 +112,11 @@ class RecDocsController < ApplicationController
     # png 文件保存在/approot/public/png/
     def set_png
       return false if @rec_doc.tiff.nil?
-      return false  unless File.exist?(File.expand_path(".")+"/upload/"+@rec_doc.tiff+".tiff")
+      return false  unless File.exist?(File.expand_path(".")+"/upload/"+@rec_doc.tiff+".tif")
+      tiff = ImageList.new(File.expand_path(".")+"/upload/"+@rec_doc.tiff+".tif")
+      @rec_doc.png_num=tiff.length
+      @rec_doc.save
+      set_rec_doc
       return true if File.exist?(File.expand_path(".")+"/public/png/"+@rec_doc.tiff+"/png-0.png")
       # p "+++++++++++++++++++++"
       # p tiff.length
@@ -117,8 +124,6 @@ class RecDocsController < ApplicationController
       # @page_num=tiff.length
       # smallcat = cat.minify
       # smallcat.display
-      tiff = ImageList.new(File.expand_path(".")+"/upload/"+@rec_doc.tiff+".tiff")
-      @rec_doc.png_num=tiff.length
       Dir.mkdir(File.expand_path(".")+"/public/png/"+@rec_doc.tiff)
       tiff.write(File.expand_path(".")+"/public/png/"+@rec_doc.tiff+"/png.png")
       return tiff.length
@@ -129,7 +134,7 @@ class RecDocsController < ApplicationController
       return if rec_doc_params[:tiff].nil?
       @rec_doc.tiff=@rec_doc.doc_type.to_s+"-"+@rec_doc.year.to_s+"-"+@rec_doc.year_num.to_s
       # tif文件保存在/approot／upload/
-      real_file=File.expand_path(".")+'/upload/'+@rec_doc.tiff+".tiff"
+      real_file=File.expand_path(".")+'/upload/'+@rec_doc.tiff+".tif"
       uploaded_io=rec_doc_params[:tiff]
       File.open(real_file,'wb') do |file|
         file.write(uploaded_io.read)
