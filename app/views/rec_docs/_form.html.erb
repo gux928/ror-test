@@ -66,8 +66,8 @@
     <div class="row">
 
         <% for i in 0..@rec_doc.png_num-1 %>
-        <div class="col-xs-3">
-            <a href=<%= "/png/"+@rec_doc.tiff+"/png-"+i.to_s+".png"%> data-lightbox="file_name-0" data-title="My caption" class="thumbnail">
+        <div class="col-xs-2">
+            <a href=<%= "/png/"+@rec_doc.tiff+"/png-"+i.to_s+".png"%> data-lightbox="file_name-0" data-title="" class="thumbnail">
                 <!-- <a href="#" class="thumbnail"> -->
                 <%= image_tag "/png/"+@rec_doc.tiff+"/png-"+i.to_s+".png" %>
             </a>

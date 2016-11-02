@@ -62,6 +62,7 @@ class RecDocsController < ApplicationController
 
     @rec_doc = RecDoc.new(rec_doc_params)
     set_tiff
+    p @rec_doc.tiff
     respond_to do |format|
       if @rec_doc.save
         format.html { redirect_to @rec_doc, notice: '保存成功！' }
@@ -76,8 +77,17 @@ class RecDocsController < ApplicationController
   # PATCH/PUT /rec_docs/1
   # PATCH/PUT /rec_docs/1.json
   def update
+    rec_doc_params["riqi(1i)"]=rec_doc_params["riqi_year"]
+    rec_doc_params["riqi(2i)"]=rec_doc_params["riqi_month"]
+    rec_doc_params["riqi(3i)"]=rec_doc_params["riqi_day"]
+    # p "212121212121212121212121212121212121212121212121212121212"
+    # RecDoc.update(rec_doc_params)
+    # p "*********tttttttttwerwerewrwerewrwerewrewrewrt*******"
+    # set_tiff
+    # p @rec_doc.tiff
     respond_to do |format|
       if @rec_doc.update(rec_doc_params)
+        set_tiff
         format.html { redirect_to @rec_doc, notice: '修改成功！' }
         format.json { render :show, status: :ok, location: @rec_doc }
       else
@@ -111,12 +121,11 @@ class RecDocsController < ApplicationController
 
     # png 文件保存在/approot/public/png/
     def set_png
-      return false if @rec_doc.tiff.nil?
-      return false  unless File.exist?(File.expand_path(".")+"/upload/"+@rec_doc.tiff+".tif")
+      return false if @rec_doc.tiff.nil?||!File.exist?(File.expand_path(".")+"/upload/"+@rec_doc.tiff+".tif")
       tiff = ImageList.new(File.expand_path(".")+"/upload/"+@rec_doc.tiff+".tif")
       @rec_doc.png_num=tiff.length
       @rec_doc.save
-      set_rec_doc
+      # set_rec_doc
       return true if File.exist?(File.expand_path(".")+"/public/png/"+@rec_doc.tiff+"/png-0.png")
       # p "+++++++++++++++++++++"
       # p tiff.length
@@ -126,11 +135,15 @@ class RecDocsController < ApplicationController
       # smallcat.display
       Dir.mkdir(File.expand_path(".")+"/public/png/"+@rec_doc.tiff)
       tiff.write(File.expand_path(".")+"/public/png/"+@rec_doc.tiff+"/png.png")
-      return tiff.length
+      return true
     end
 
     def set_tiff
       @rec_doc.png_num=0
+      @rec_doc.save
+      p "##@@@@@@@@@@@@@@@@@@@"
+      p rec_doc_params[:tiff]
+      p "##@@@@@@@@@@@@@@@@@@@"
       return if rec_doc_params[:tiff].nil?
       @rec_doc.tiff=@rec_doc.doc_type.to_s+"-"+@rec_doc.year.to_s+"-"+@rec_doc.year_num.to_s
       # tif文件保存在/approot／upload/
@@ -139,7 +152,11 @@ class RecDocsController < ApplicationController
       File.open(real_file,'wb') do |file|
         file.write(uploaded_io.read)
       end
-      set_png
+      tiff = ImageList.new(File.expand_path(".")+"/upload/"+@rec_doc.tiff+".tif")
+      @rec_doc.png_num=tiff.length
+      @rec_doc.save
+      Dir.mkdir(File.expand_path(".")+"/public/png/"+@rec_doc.tiff)
+      tiff.write(File.expand_path(".")+"/public/png/"+@rec_doc.tiff+"/png.png")
     end
 
 
