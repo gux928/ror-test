@@ -46,9 +46,9 @@ class RecDocsController < ApplicationController
   end
 
   # GET /rec_docs/1/print
-  def print
-    render :layout => false
-  end
+  # def print
+  #   render :layout => false
+  # end
 
   # POST /rec_docs
   # POST /rec_docs.json

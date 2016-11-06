@@ -9,6 +9,7 @@
 <p id="notice"><%= notice %></p>
 
 <!-- <body class="container"> -->
+<div class="diss">
 <div class="row">
     <div class="col-xs-3">
         <h4>收文编号</h4>
@@ -64,8 +65,11 @@
     <% end %>
 </div>
   <% end %>
-
+<div class="row">
 <%= link_to '修改', edit_rec_doc_path(@rec_doc),class:"btn btn-primary col-xs-1 col-xs-offset-3" %>
 <%= link_to '返回', rec_docs_path ,class:"btn btn-primary col-xs-1 col-xs-offset-1"%>
-<%= link_to '打印', print_rec_doc_path(@rec_doc) ,class:"btn btn-primary col-xs-1 col-xs-offset-1"%>
+<input type="button" value="打印" class="btn btn-primary col-xs-1 col-xs-offset-1" onclick="javascript:window.print();"/>
+</div>
+</div>
+<%= render 'print', rec_doc: @rec_doc %>
 <!-- </body> -->
