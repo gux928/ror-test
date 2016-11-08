@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :users
   root 'welcome#index'
 
   # get 'rec_docs/:id/print',to: 'rec_docs#print',as: 'print_rec_doc'

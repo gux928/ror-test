@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161029075313) do
+ActiveRecord::Schema.define(version: 20161108021529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,24 @@ ActiveRecord::Schema.define(version: 20161029075313) do
     t.integer  "doc_type"
     t.string   "tiff"
     t.integer  "png_num"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email"
+    t.string   "password_digest"
+    t.string   "name"
+    t.string   "phone"
+    t.string   "phone_short"
+    t.string   "id_num"
+    t.string   "office"
+    t.boolean  "party_member"
+    t.integer  "authority"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["id_num"], name: "index_users_on_id_num", unique: true, using: :btree
+    t.index ["phone"], name: "index_users_on_phone", unique: true, using: :btree
+    t.index ["phone_short"], name: "index_users_on_phone_short", unique: true, using: :btree
   end
 
 end
