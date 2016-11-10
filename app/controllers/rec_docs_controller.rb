@@ -2,7 +2,7 @@ require "active_support/all"
 require 'RMagick'
 include Magick
 class RecDocsController < ApplicationController
-  before_action :set_rec_doc, only: [:show, :edit, :update, :destroy,:print]
+  before_action :set_rec_doc,:login_check, only: [:show, :edit, :update, :destroy,:print]
 
   # GET /rec_docs
   # GET /rec_docs.json
@@ -159,5 +159,8 @@ class RecDocsController < ApplicationController
       tiff.write(File.expand_path(".")+"/public/png/"+@rec_doc.tiff+"/png.png")
     end
 
+    def login_check
+      redirect_to login_path if !logged_in?
+    end
 
 end
