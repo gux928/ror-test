@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController
   def new
+    if logged_in?
+      redirect_to root_path
+    end
+    # render :layout => false
   end
 
   def create
@@ -7,9 +11,9 @@ class SessionsController < ApplicationController
     p user
     if user && user.authenticate(params[:session][:password])
       p "ok!!"
-      flash[:danger] = "ok!!"
+      flash[:danger] = user.name+",登入成功"
       log_in user
-      redirect_to user
+      redirect_to root_path
     else
       p "no!!"
       render 'new'
