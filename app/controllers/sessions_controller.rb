@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       p "ok!!"
       flash[:danger] = user.name+",登入成功"
       log_in user
-      redirect_to root_path
+      redirect_back_or_index
     else
       p "no!!"
       render 'new'

@@ -15,8 +15,20 @@ module SessionsHelper
     session.delete(:user_id)
     @current_user = nil
   end
-  
+
   def login_check
-    redirect_to login_path if !logged_in?
+    if !logged_in?
+      store_location
+      redirect_to login_path
+    end
+  end
+
+  def redirect_back_or_index
+    redirect_to(session[:forwarding_url] || root_path)
+    session.delete(:forwarding_url)
+  end
+# 存储以后需要的地址
+  def store_location
+    session[:forwarding_url] = request.url if request.get?
   end
 end

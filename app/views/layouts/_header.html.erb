@@ -24,7 +24,10 @@
                     <%= link_to "新增信访",new_rec_doc_path(type:1) %>
                 </li>
                 <li>
-                    <%= link_to "退出",logout_path ,:method => :delete%>
+                <%= link_to "退出",logout_path,:method => :delete %>
+                </li>
+                <li>
+                <%= link_to "退出",logout_url %>
                 </li>
             </ul>
         </div>

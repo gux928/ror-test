@@ -1,11 +1,13 @@
 <div class="text-center">
   <!-- <%= @rec_doc.doc_type %>
   <%= @rec_doc.doc_type == 0 %> -->
+  <div class="row">
     <% if @rec_doc.doc_type == 0 %>
       <h1>新增收文</h1>
     <% else %>
       <h1>新增信访</h1>
     <% end %>
+  </div>
 </div>
 
 <%= render 'form', rec_doc: @rec_doc %>

@@ -15,10 +15,13 @@
         <% end %>
 
         <div class="container">
+          <div class="row" >
           <% flash.each do |key, value| %>
           <%= content_tag(:div, value, class: "col-xs-6 col-xs-offset-3 alert alert-#{key}") %>
           <% end %>
+          </div>
             <%= yield %>
+
         </div>
 
     </body>
