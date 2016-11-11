@@ -35,6 +35,7 @@ gem 'bootstrap-sass'
 gem 'ransack'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
+gem 'bcrypt'
 
 #, github: 'jonatack/will_paginate'
 

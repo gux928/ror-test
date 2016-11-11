@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @user.phone %>
+</p>
+
+<p>
+  <strong>Phone short:</strong>
+  <%= @user.phone_short %>
+</p>
+
+<p>
+  <strong>Id num:</strong>
+  <%= @user.id_num %>
+</p>
+
+<p>
+  <strong>Office:</strong>
+  <%= @user.office %>
+</p>
+
+<p>
+  <strong>Party member:</strong>
+  <%= @user.party_member %>
+</p>
+
+<p>
+  <strong>Authority:</strong>
+  <%= @user.authority %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
+<%= link_to '退出', logout_path,method:"delete" %>

@@ -1,0 +1,79 @@
+<%= stylesheet_link_tag "lightbox.min" %>
+<%= javascript_include_tag "lightbox.min" %>
+<!-- <%= javascript_include_tag "bootstrap.min" %> -->
+<!-- <script>
+    lightbox.option({
+      'resizeDuration': 200,
+      'wrapAround': true
+    })
+</script> -->
+
+
+<!-- <body class="container"> -->
+<div class="diss">
+  <p id="notice"><%= notice %></p>
+    <div class="row">
+        <div class="col-xs-3">
+            <h4>收文编号</h4>
+            <p>
+                <% if @rec_doc.doc_type.nil? || @rec_doc.doc_type == 0 %>
+                收文<%= @rec_doc.year %>［<%= @rec_doc.year_num %>］号
+            <% else %>
+                信访<%= @rec_doc.year %>［<%= @rec_doc.year_num %>］号
+                <% end %>
+            </p>
+        </div>
+        <div class="col-xs-3">
+            <p>
+                <h4>收文日期:</h4>
+                <%= @rec_doc.riqi %>
+            </p>
+        </div>
+        <div class="col-xs-3">
+            <p>
+                <h4>文件来源:</h4>
+                <%= @rec_doc.from %>
+            </p>
+        </div>
+        <div class="col-xs-3">
+            <p>
+                <h4>来源编号:</h4>
+                <%= @rec_doc.from_code %>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <p>
+                <h4>文件内容:</h4>
+                <%= @rec_doc.wjnr %>
+            </p>
+        </div>
+    </div>
+    <% if @png_exist %>
+    <div class="row">
+        <div class="col-xs-12">
+            <p>
+                <h4>扫描件:</h4>
+            </p>
+        </div>
+        <% for i in 0..@rec_doc.png_num-1 %>
+        <div class="col-xs-2">
+            <a href=<%= "/png/"+@rec_doc.tiff+"/png-"+i.to_s+".png"%> data-lightbox="file_name-0" data-title="" class="thumbnail">
+                <!-- <a href="#" class="thumbnail"> -->
+                <%= image_tag "/png/"+@rec_doc.tiff+"/png-"+i.to_s+".png" %>
+            </a>
+        </div>
+        <% end %>
+    </div>
+    <% end %>
+    <div class="row">
+        <%= link_to '修改', edit_rec_doc_path(@rec_doc),class:"btn btn-primary col-xs-1 col-xs-offset-3" %>
+        <%= link_to '返回', rec_docs_path ,class:"btn btn-primary col-xs-1 col-xs-offset-1"%>
+        <input type="button" value="打印" class="btn btn-primary col-xs-1 col-xs-offset-1" onclick="javascript:window.print();"/>
+    </div>
+</div>
+<% content_for :print do %>
+  <%= render 'print', rec_doc: @rec_doc %>
+<% end %>
+<!-- </body> -->

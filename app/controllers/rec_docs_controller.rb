@@ -2,6 +2,7 @@ require "active_support/all"
 require 'RMagick'
 include Magick
 class RecDocsController < ApplicationController
+  before_action :login_check
   before_action :set_rec_doc, only: [:show, :edit, :update, :destroy,:print]
 
   # GET /rec_docs
@@ -159,5 +160,6 @@ class RecDocsController < ApplicationController
       tiff.write(File.expand_path(".")+"/public/png/"+@rec_doc.tiff+"/png.png")
     end
 
+    
 
 end
