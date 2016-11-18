@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161108021529) do
+ActiveRecord::Schema.define(version: 20161112033909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "fixed_assets", force: :cascade do |t|
+    t.string   "number"
+    t.string   "belongs_to"
+    t.string   "main_class"
+    t.string   "sub_class"
+    t.string   "serial_number"
+    t.string   "month_of_purchase"
+    t.string   "position"
+    t.string   "brand"
+    t.string   "model"
+    t.string   "remarks"
+    t.string   "user"
+    t.string   "unit_price"
+    t.string   "invoice"
+    t.string   "photo"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
 
   create_table "rec_docs", force: :cascade do |t|
     t.text     "wjnr"

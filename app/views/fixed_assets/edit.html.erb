@@ -1,0 +1,6 @@
+<h1>Editing Fixed Asset</h1>
+
+<%= render 'form_edit', fixed_asset: @fixed_asset %>
+<% content_for :script do %>
+<%= javascript_include_tag "fixed_assets.js" %>
+<% end %>

@@ -1,0 +1,124 @@
+
+<h1>新增资产</h1>
+<div id="tab-1" class="tab-111">
+    <div id="belong" class="row">
+        <h3>付款单位</h3>
+        <div class="btn-group  col-md-12 col-xs-12" data-toggle="buttons">
+            <% @my_code["belong_code"].each do |k,v| %>
+            <label class="btn btn-default  belong-label col-md-3 col-xs-3" key=<%= k %>>
+                <input type="radio" autocomplete="off" name="main_class" value=<%= v %>>
+                <%= k %>：代码：<%= v %>
+            </label>
+            <% end %>
+        </div>
+    </div>
+    <div id="date" class="row">
+        <h3>购置时间</h3>
+
+        <div class="btn-group  col-md-12 col-xs-12" data-toggle="buttons">
+            <% for i in 0..11 %>
+            <label class="btn btn-default yy-label col-md-1 col-xs-1">
+                <input class="yy_input" type="radio" autocomplete="off" value="<%= Time.now.year.to_i-i %>"><%= Time.now.year.to_i-i %></label>
+            <% end %>
+        </div>
+        <h5></h5>
+
+        <div class="btn-group  col-md-12 col-xs-12" data-toggle="buttons">
+            <% for i in 1..12 %>
+            <label class="btn btn-default mm-label col-md-1 col-xs-1">
+                <input type="radio" autocomplete="off" value="<%= i %>"><%= i %>月
+            </label>
+            <% end %>
+        </div>
+    </div>
+
+    <div id="quantity" class="row">
+        <h3>购买数量</h3>
+
+        <div class="btn-group  col-md-12 col-xs-12" data-toggle="buttons">
+            <% for i in 0..9 %>
+            <label class="btn btn-default quantity-label col-md-1 col-xs-1">
+                <input class="quantity_input" type="radio" autocomplete="off" value="<%= i*10 %>"><%= i*10 %></label>
+            <% end %>
+        </div>
+
+        <div class="btn-group  col-md-12 col-xs-12" data-toggle="buttons">
+            <% for i in 0..9 %>
+            <label class="btn btn-default quantity-label col-md-1 col-xs-1">
+                <input class="quantity_input" type="radio" autocomplete="off" value="<%= i %>"><%= i %></label>
+            <% end %>
+        </div>
+    </div>
+    <div class="row text-center">
+      <button id="tab-1-next" type="button" class="btn btn-primary" disabled="disabled">下一步</button>
+    </div>
+</div>
+
+<div id="tab-2" style="display:none">
+    <div id="main_class" class="row">
+        <h3>大类</h3>
+        <div class="btn-group  col-md-12 col-xs-12" data-toggle="buttons">
+            <% @my_code["main_class_code"].each do |k,v| %>
+            <label class="btn btn-default main_class_label col-md-2 col-xs-4" id="main_code_<%= v %>" tab-index=<%= v %> key=<%= k %>>
+                <input type="radio" autocomplete="off" name="main_class" value=<%= v %>>
+                <%= k %>：代码：<%= v %>
+            </label>
+            <% end %>
+        </div>
+    </div>
+
+    <div id="land_code_tab" class="sub_class_tab row" style="display: none">
+        <h3>土地代码</h3>
+        <h4>暂无代码</h4>
+    </div>
+
+    <div id="realestate_code_tab" class="sub_class_tab row" style="display: none">
+        <h3>房产代码</h3>
+        <h4>暂无代码</h4>
+    </div>
+
+    <div id="vehicle_code_tab" class="sub_class_tab row" style="display: none">
+        <h3>车辆代码</h3>
+        <div class="btn-group col-md-12 col-xs-12" data-toggle="buttons">
+            <% @my_code["vehicle_code"].each do |k,v|  %>
+            <label class="btn btn-default sub_class_label vehicle_radio col-xs-4 col-md-3" key=<%= k %>>
+                <input type="radio" autocomplete="off" name="vehicles" value="<%= v %>"><%= k %>：代码：<%= v %>
+            </label>
+            <% end %>
+        </div>
+    </div>
+
+    <div id="furniture_code_tab" class="sub_class_tab row" style="display: none">
+        <h3>家具代码</h3>
+        <div class="btn-group col-md-12 col-xs-12" data-toggle="buttons">
+            <% @my_code["furniture_code"].each do |k,v| %>
+            <label class="btn btn-default furniture_radio sub_class_label col-xs-4 col-md-3" key=<%= k %>>
+                <input type="radio" autocomplete="off" name="furnitures" value="<%= v %>"><%= k %>：代码：<%= v %>
+            </label>
+            <% end %>
+        </div>
+    </div>
+
+    <div id="equipment_code_tab" class="sub_class_tab row">
+        <h3>设备代码</h3>
+        <div class="btn-group col-md-12 col-xs-12" data-toggle="buttons">
+            <% @my_code["equipment_code"].each_with_index do |k,i| %>
+            <label class="btn btn-default equipment_radio sub_class_label col-md-3 col-xs-4" key=<%= k[0] %>>
+                <input type="radio" autocomplete="off" name="belongs" value="<%= k[1] %>"><%= k[0] %>：代码：<%= k[1] %>
+            </label>
+            <% end %>
+        </div>
+    </div>
+    <div class="row text-center">
+      <button id="tab-2-pre" type="button" class="btn btn-primary">上一步</button>
+      <button id="tab-2-next" type="button" class="btn btn-primary" disabled="disabled">下一步</button>
+    </div>
+</div>
+
+<div id="tab-form" style="display:none">
+<%= render 'form', fixed_asset: @fixed_asset %>
+</div>
+
+<% content_for :script do %>
+<%= javascript_include_tag "fixed_assets.js" %>
+<% end %>

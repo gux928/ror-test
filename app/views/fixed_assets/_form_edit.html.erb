@@ -1,0 +1,56 @@
+<%= form_for(fixed_asset) do |f| %>
+  <% if fixed_asset.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(fixed_asset.errors.count, "error") %> prohibited this fixed_asset from being saved:</h2>
+      <ul>
+        <% fixed_asset.errors.full_messages.each do |message| %>
+          <li>
+            <%= message %>
+          </li>
+          <% end %>
+      </ul>
+    </div>
+    <% end %>
+        <%= f.hidden_field :month_of_purchase ,class:"form-control"%>
+      <div class="form-group col-xs-6 col-md-4">
+        <%= f.label :代码 %>
+          <%= f.text_field :number ,class:"form-control" ,:readonly => true %>
+      </div>
+      <div class="form-group col-xs-6 col-md-4">
+        <%= f.label :购置单位 %>
+          <%= f.text_field :belongs_to ,class:"form-control" ,:readonly => true%>
+      </div>
+      <div class="form-group col-xs-6 col-md-4">
+        <%= f.label :大类 %>
+          <%= f.text_field :main_class ,class:"form-control" ,:readonly => true%>
+      </div>
+      <div class="form-group col-xs-6 col-md-4">
+        <%= f.label :细类 %>
+          <%= f.text_field :sub_class ,class:"form-control" ,:readonly => true%>
+      </div>
+      <div class="form-group col-xs-6 col-md-4">
+        <%= f.label :品牌%>
+          <%= f.text_field :brand ,class:"form-control"%>
+      </div>
+      <div class="form-group col-xs-6 col-md-4">
+        <%= f.label :型号%>
+          <%= f.text_field :model ,class:"form-control"%>
+      </div>
+      <div class="form-group col-xs-6 col-md-4">
+        <%= f.label :单价%>
+          <%= f.text_field :unit_price ,class:"form-control"%>
+      </div>
+      <div class="form-group col-xs-6 col-md-4">
+        <%= f.label :使用人%>
+          <%= f.text_field :user ,class:"form-control"%>
+      </div>
+      <div class="form-group col-xs-12 col-md-8 col-md-offset-2">
+        <%= f.label :备注%>
+          <%= f.text_area :remarks ,class:"form-control"%>
+      </div>
+      <div class="text-center col-xs-12">
+          <button id="tab-form-pre" type="button" class="btn btn-primary">上一步</button>
+          <button type="submit" class="btn btn-primary" id="submit-btn" disabled="disabled">提交</button>
+      </div>
+      <% end %>
