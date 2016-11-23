@@ -24,3 +24,5 @@
 /config/secrets.yml
 ／.idea
 .DS_Store
+*/.DS_Store
+*/*/.DS_Store

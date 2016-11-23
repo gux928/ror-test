@@ -17,11 +17,11 @@
         <%= f.label :收文日期 %>
         <!-- <%= f.date_select :riqi ,{},class:"form-control" %> -->
         <div class="input-group">
-            <%= f.number_field "riqi(1i)" ,value:Time.now.year ,class:"form-control" %>
+            <%= f.number_field "riqi(1i)" ,value:@time.year ,class:"form-control" %>
             <div class="input-group-addon">年</div>
-            <%= f.number_field "riqi(2i)" ,value:Time.now.month,class:"form-control" %>
+            <%= f.number_field "riqi(2i)" ,value:@time.month,class:"form-control" %>
             <div class="input-group-addon">月</div>
-            <%= f.number_field "riqi(3i)" ,value:Time.now.day,class:"form-control" %>
+            <%= f.number_field "riqi(3i)" ,value:@time.day,class:"form-control" %>
             <div class="input-group-addon">日</div>
         </div>
     </div>

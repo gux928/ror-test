@@ -15,10 +15,10 @@
 # #     console.log("222222222")
 #
 #
-$("input#fixed_asset_number").val("000000005000")
-$("#fixed_asset_main_class").val("设备")
+# $("input#fixed_asset_number").val("000000005000")
+# $("#fixed_asset_main_class").val("设备")
 $(".main_class_label").eq(4).addClass("active")
-$("#fixed_asset_month_of_purchase").val("000000")
+# $("#fixed_asset_month_of_purchase").val("000000")
 
 console.log($("lable").attr("class"))
 
@@ -26,6 +26,8 @@ console.log($("lable").attr("class"))
 
 next_flag=[0,0,0,0]
 next_check = ->
+  code=$("input#fixed_asset_number").val()
+  console.log("code="+code)
   if next_flag.toString() == [1,1,1,1].toString()
     console.log("checked,ok!!!!")
     $("#tab-1-next").removeAttr("disabled")
@@ -37,6 +39,7 @@ next_check_2 = ->
   code=$("input#fixed_asset_number").val()
   main_class_code=code.substr(7,2)
   sub_class_code=code.substr(9)
+  console.log("code="+code)
   if main_class_code=="00" || sub_class_code=="000"
      console.log("step 2 checked,bu not ok!!!!")
   else
@@ -99,7 +102,7 @@ $(".belong-label").click ->
 $(".yy-label").click ->
   console.log($(this).attr("class")+" index("+$(this).index()+") pressed")
   code=$("input#fixed_asset_number").val()
-  new_code=code.substr(0,1)+$(this).children().val()+code.substr(5)
+  new_code=code.substr(0,6)+$(this).children().val()+code.substr(-5)
   $("input#fixed_asset_number").val(new_code)
   mop=$("input#fixed_asset_month_of_purchase").val()
   new_mop=$(this).children().val()+mop.substr(4)
@@ -113,10 +116,10 @@ $(".mm-label").click ->
   console.log($(this).attr("class")+" index("+$(this).index()+") pressed")
   code=$("input#fixed_asset_number").val()
   mm=$(this).children().val()/1+100+""
-  new_code=code.substr(0,5)+mm.substr(1)+code.substr(7)
+  new_code=code.substr(0,10)+mm.substr(1)+code.substr(-3)
   $("input#fixed_asset_number").val(new_code)
   mop=$("input#fixed_asset_month_of_purchase").val()
-  new_mop=mop.substr(0,4)+$(this).children().val()
+  new_mop=mop.substr(0,4)+mm.substr(1)
   $("input#fixed_asset_month_of_purchase").val(new_mop)
   next_flag[2]=1
   next_check()
@@ -167,7 +170,7 @@ $(".sub_class_label").click ->
   index=$(this).attr('tab-index')*1-1
   console.log(index)
   code=$("input#fixed_asset_number").val()
-  new_code=code.substr(0,9)+$(this).children().val()
+  new_code=code.substr(0,3)+$(this).children().val()+code.substr(-9)
   $("input#fixed_asset_number").val(new_code)
   $("#fixed_asset_sub_class").val($(this).attr('key'))
   next_check_2()

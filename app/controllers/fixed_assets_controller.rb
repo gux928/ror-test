@@ -1,4 +1,5 @@
 class FixedAssetsController < ApplicationController
+  before_action :login_check
   before_action :set_fixed_asset, only: [:show, :edit, :update, :destroy]
 
   # GET /fixed_assets
@@ -33,6 +34,9 @@ class FixedAssetsController < ApplicationController
   # GET /fixed_assets/new
   def new
     @fixed_asset = FixedAsset.new
+    @fixed_asset.number="005000000000000"
+    @fixed_asset.month_of_purchase="000000"
+    @fixed_asset.main_class="设备"
     @my_code=YAML.load(File.open(File.expand_path(".")+"/code.yml"))
   end
 
@@ -64,9 +68,25 @@ class FixedAssetsController < ApplicationController
   # PATCH/PUT /fixed_assets/1
   # PATCH/PUT /fixed_assets/1.json
   def update
+    p fixed_asset_params
+    fixed_asset_params['month_of_purchase']=fixed_asset_params["number"][6,6]
+    p " "
+    p " "
+    p " "
+    kkk=fixed_asset_params
+    p kkk
+    fixed_asset_params[:month_of_purchase]=fixed_asset_params["number"][6,6]
+    kkk[:month_of_purchase]=fixed_asset_params["number"][6,6]
+    p " "
+    p kkk[:month_of_purchase]
+    p fixed_asset_params[:month_of_purchase]
+    p " "
+    p " "
+    p " "
+    #好奇葩的问题，为什么params不能被修改？
     respond_to do |format|
-      if @fixed_asset.update(fixed_asset_params)
-        format.html { redirect_to @fixed_asset, notice: 'Fixed asset was successfully updated.' }
+      if @fixed_asset.update(kkk)
+        format.html { redirect_to @fixed_asset, notice: '资产信息修改成功！' }
         format.json { render :show, status: :ok, location: @fixed_asset }
       else
         format.html { render :edit }
@@ -78,9 +98,10 @@ class FixedAssetsController < ApplicationController
   # DELETE /fixed_assets/1
   # DELETE /fixed_assets/1.json
   def destroy
+    num=@fixed_asset.number
     @fixed_asset.destroy
     respond_to do |format|
-      format.html { redirect_to fixed_assets_url, notice: 'Fixed asset was successfully destroyed.' }
+      format.html { redirect_to fixed_assets_url, notice: num+'   删除成功' }
       format.json { head :no_content }
     end
   end

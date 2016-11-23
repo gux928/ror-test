@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   delete '/logout', to:'sessions#destroy'
   get '/logout', to:'sessions#destroy'
 
+  get '/upload', to:'welcome#upload'
+  post '/upload', to:'welcome#import_csv'
+
   resources :users
   root 'welcome#index'
 

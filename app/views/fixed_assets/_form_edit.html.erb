@@ -30,6 +30,10 @@
           <%= f.text_field :sub_class ,class:"form-control" ,:readonly => true%>
       </div>
       <div class="form-group col-xs-6 col-md-4">
+        <%= f.label :购买时间 %>
+          <%= f.text_field :month_of_purchase ,class:"form-control" ,:readonly => true ,:value => fixed_asset.month_of_purchase[0,4]+"年"+fixed_asset.month_of_purchase[4,2]+"月" %>
+      </div>
+      <div class="form-group col-xs-6 col-md-4">
         <%= f.label :品牌%>
           <%= f.text_field :brand ,class:"form-control"%>
       </div>

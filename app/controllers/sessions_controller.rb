@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
       log_in user
       redirect_back_or_index
     else
-      p "no!!"
+      flash[:danger] = "用户名或者密码错误，请重试！"
       render 'new'
     end
   end

@@ -1,0 +1,5 @@
+<%= form_tag({action: :import_csv},multipart: true) do %>
+<%= file_field_tag 'csv_file' ,accept:'.csv'%>
+<%= select_tag(:file_type,options_for_select([['shoufawen','doc_file'],['zichan','asset_file']])) %>
+<%= submit_tag '上传' %>
+<% end %>

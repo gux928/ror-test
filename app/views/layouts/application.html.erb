@@ -17,24 +17,24 @@
         <% end %>
 
         <div class="container">
+            <% if logged_in? %>
             <div class="row">
                 <% flash.each do |key, value| %>
                 <%= content_tag(:div, value, class: "col-xs-6 col-xs-offset-3 alert alert-#{key}") %>
                 <% end %>
             </div>
+            <% end %>
             <%= yield %>
 
         </div>
         <%= yield :print %>
 
         <footer>
-          <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-          <script src="//cdn.bootcss.com/jquery-ujs/1.2.2/rails.min.js"></script>
-          <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+            <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+            <script src="//cdn.bootcss.com/jquery-ujs/1.2.2/rails.min.js"></script>
+            <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
             <%= yield :script %>
         </footer>
     </body>
-
-
 
 </html>

@@ -30,6 +30,7 @@ class RecDocsController < ApplicationController
   # GET /rec_docs/new
   def new
     p params[:type]
+    @time=Time.now
     @rec_doc = RecDoc.new
     @rec_doc.year=Time.now.year
     @rec_doc.year_num=RecDoc.where("year = ? AND doc_type = ?",Time.now.year,params[:type]).count+1
@@ -43,6 +44,11 @@ class RecDocsController < ApplicationController
   # GET /rec_docs/1/edit
   def edit
     p @rec_doc
+    if @rec_doc.riqi.nil?
+      @time=Time.new(2007,1,1)
+    else
+      @time=@rec_doc.riqi
+    end
     @png_exist=set_png
   end
 
@@ -160,6 +166,6 @@ class RecDocsController < ApplicationController
       tiff.write(File.expand_path(".")+"/public/png/"+@rec_doc.tiff+"/png.png")
     end
 
-    
+
 
 end
