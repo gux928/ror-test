@@ -1,0 +1,20 @@
+
+<!-- <form action="/fa_upload" class="dropzone">
+  <div class="fallback">
+    <input name="file" type="file" multiple />
+  </div>
+</form> -->
+<link href="//cdn.bootcss.com/dropzone/4.3.0/min/dropzone.min.css" rel="stylesheet">
+<%= form_tag({action: :save_pic}, multipart: true ,class: "dropzone",) do %>
+<div class="fallback">
+  <%= file_field_tag 'picture' %>
+    </div>
+<% end %>
+
+
+<% content_for :script do %>
+<script src="//cdn.bootcss.com/dropzone/4.3.0/min/dropzone.min.js"></script>
+<!-- <script>
+  $("div#myId").dropzone();
+</script> -->
+<% end %>

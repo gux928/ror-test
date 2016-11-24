@@ -17,6 +17,10 @@
 #
 # $("input#fixed_asset_number").val("000000005000")
 # $("#fixed_asset_main_class").val("设备")
+
+
+
+
 $(".main_class_label").eq(4).addClass("active")
 # $("#fixed_asset_month_of_purchase").val("000000")
 

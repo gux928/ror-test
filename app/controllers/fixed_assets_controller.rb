@@ -1,6 +1,6 @@
 class FixedAssetsController < ApplicationController
   before_action :login_check
-  before_action :set_fixed_asset, only: [:show, :edit, :update, :destroy]
+  before_action :set_fixed_asset, only: [:show, :edit, :update, :destroy,:upload,:save_pic]
 
   # GET /fixed_assets
   # GET /fixed_assets.json
@@ -29,6 +29,32 @@ class FixedAssetsController < ApplicationController
   # GET /fixed_assets/1
   # GET /fixed_assets/1.json
   def show
+  end
+
+  def upload
+  end
+
+  def save_pic
+    p params[:file].tempfile.path
+    my_path=File.expand_path(".")+"/public/fixed_assets_pic/"+@fixed_asset.number
+    if @fixed_asset.photo.nil?
+      @fixed_asset.photo=1
+      Dir.mkdir(my_path) if File.exist?(my_path)
+    else
+      @fixed_asset.photo=0 if @fixed_asset.photo.to_i>1000
+      @fixed_asset.photo=@fixed_asset.photo.to_i+1
+    end
+    @fixed_asset.save
+    uploaded_io=params[:file]
+    real_file=my_path+"/"+@fixed_asset.photo.to_s+File.extname(params[:file].original_filename)
+    File.open(real_file,'wb') do |file|
+      file.write(uploaded_io.read)
+    end
+    my_dir=Dir.open(my_path)
+    p Dir.entries(my_path)
+    my_dir.each do |filename|
+      p filename
+    end
   end
 
   # GET /fixed_assets/new

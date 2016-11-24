@@ -1,5 +1,4 @@
 <%= stylesheet_link_tag "lightbox.min" %>
-<%= javascript_include_tag "lightbox.min" %>
 <!-- <script>
     lightbox.option({
       'resizeDuration': 200,
@@ -74,5 +73,8 @@
 </div>
 <% content_for :print do %>
   <%= render 'print', rec_doc: @rec_doc %>
+<% end %>
+<% content_for :script do %>
+<%= javascript_include_tag "lightbox.min" %>
 <% end %>
 <!-- </body> -->

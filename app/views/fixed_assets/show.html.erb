@@ -4,6 +4,7 @@
   <strong>Serial:</strong>
 
 </p> -->
+<%= stylesheet_link_tag "lightbox.min" %>
 
 <div class="row">
     <div class="col-xs-6 col-md-3">
@@ -56,17 +57,30 @@
             <%= @fixed_asset.unit_price %>
         </p>
     </div>
-  </div>
-  <div class="row">
+</div>
+<div class="row">
     <div class="col-xs-12 col-md-8 col-md-offset-2">
         <h4>备注</h4>
         <p>
             <%= @fixed_asset.remarks %>
         </p>
     </div>
-    <div class="row">
-        <%= link_to '修改', edit_fixed_asset_path(@fixed_asset),class:"btn btn-primary col-xs-1 col-xs-offset-3" %>
-        <%= link_to '返回', fixed_assets_path ,class:"btn btn-primary col-xs-1 col-xs-offset-1"%>
-        <%= link_to '删除', url_for(action: :destroy,id: @fixed_asset.id),method: :delete, data: {confirm: "确认删除此资产信息?"} ,class:"btn btn-danger col-xs-1 col-xs-offset-1"%>
+</div>
+<div class="row">
+  <div class="col-xs-12 ">
+  <h4>图片资料</h4>
+    <%= raw pic_list("fixed_assets_pic/"+@fixed_asset.number,"jpeg",@fixed_asset.photo) %>
+  </div>
+</div>
 
-    </div>
+<div class="row">
+    <%= link_to '修改', edit_fixed_asset_path(@fixed_asset),class:"btn btn-primary col-xs-1 col-xs-offset-3" %>
+    <%= link_to '返回', fixed_assets_path ,class:"btn btn-primary col-xs-1 col-xs-offset-1"%>
+    <!-- <%= link_to '上传', upload_fixed_assets_path ,class:"btn btn-primary col-xs-1 col-xs-offset-1"%> -->
+    <%= link_to '删除', url_for(action: :destroy,id: @fixed_asset.id),method: :delete, data: {confirm: "确认删除此资产信息?"} ,class:"btn btn-danger col-xs-1 col-xs-offset-1"%>
+
+</div>
+
+<% content_for :script do %>
+<%= javascript_include_tag "lightbox.min" %>
+<% end %>
