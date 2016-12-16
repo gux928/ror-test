@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   get '/upload', to:'welcome#upload'
   post '/upload', to:'welcome#import_csv'
 
+  get '/download_doc', to:'welcome#download_doc',as: 'download_doc'
+  get '/download_fa', to:'welcome#download_fa',as: 'download_fa'
+
 
   get '/fixed_assets/:id/upload',to:'fixed_assets#upload',as: 'upload_fixed_assets'
   post '/fixed_assets/:id/upload',to:'fixed_assets#save_pic'

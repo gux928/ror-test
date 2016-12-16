@@ -11,6 +11,20 @@ class WelcomeController < ApplicationController
 
   end
 
+  def download_doc
+    @rec_docs  = RecDoc.all
+    respond_to do |format|
+      format.csv { send_data RecDoc.to_csv(@rec_docs), filename:"Doc.csv"}
+    end
+  end
+
+  def download_fa
+    @fas  = FixedAsset.all
+    respond_to do |format|
+      format.csv { send_data FixedAsset.to_csv(@fas), filename:"FixedAsset.csv"}
+    end
+  end
+
   def import_csv
     require 'yaml'
     @my_code=YAML.load(File.open(File.expand_path(".")+"/code.yml"))

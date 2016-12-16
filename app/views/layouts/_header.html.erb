@@ -34,6 +34,12 @@
                 <li>
                     <%= link_to "退出",logout_path,:method => :delete %>
                 </li>
+                <li>
+                    <%= link_to "收发文导出", download_doc_path(format: "csv") %>
+                </li>
+                <li>
+                    <%= link_to "固定资产导出", download_fa_path(format: "csv") %>
+                </li>
             </ul>
         </div>
     </nav>
