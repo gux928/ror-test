@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   delete '/logout', to:'sessions#destroy'
   get '/logout', to:'sessions#destroy'
 
-  get '/upload', to:'welcome#upload'
+  get '/upload', to:'welcome#upload' ,as:'upload_csv'
   post '/upload', to:'welcome#import_csv'
 
   get '/download_doc', to:'welcome#download_doc',as: 'download_doc'
