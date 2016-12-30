@@ -12,6 +12,9 @@
     <!-- <%= will_paginate @rec_docs %> -->
     <%= will_paginate @rec_docs, renderer: BootstrapPagination::Rails %>
 </div>
+<!--<%= link_to "20",request.params.merge(:page_limit => '20') %>
+<%= link_to "50",request.params.merge(:page_limit => '50') %>
+<%= link_to "100",request.params.merge(:page_limit => '100') %>-->
 <table class="table table-striped">
 
     <thead>

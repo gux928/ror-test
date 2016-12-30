@@ -9,18 +9,23 @@ class RecDocsController < ApplicationController
   # GET /rec_docs.json
   def index
     @q=RecDoc.ransack(params[:q])
+    p "-"*30
+    p params
+    p "-"*30
+    page_limit = params[:page_limit]||10
     if params[:q].nil?
-      @rec_docs = RecDoc.paginate(page: params[:page], per_page: 10).order(riqi: :desc)
+      @rec_docs = RecDoc.paginate(page: params[:page], per_page: page_limit).order(riqi: :desc)
     else
-      @rec_docs=@q.result.paginate(page: params[:page], per_page: 10).order(created_at: :desc)
+      @rec_docs=@q.result.paginate(page: params[:page], per_page: page_limit).order(created_at: :desc)
     end
-    p @rec_docs
+    # p @rec_docs
   end
 
   # GET /rec_docs/1
   # GET /rec_docs/1.json
   def show
     # @page_num=0
+    p @rec_doc
     @png_exist=set_png
     p "****************"
     p @rec_doc.tiff

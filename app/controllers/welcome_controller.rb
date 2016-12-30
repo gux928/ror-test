@@ -39,11 +39,15 @@ class WelcomeController < ApplicationController
       CSV.foreach(path2) do |row|
         i=i+1
         if row[10]=="xf"
-          tiff1="1"+"-"+row[9]+"-"+row[1] unless row[9].nil?||row[1].nil?||row[7].nil?
-          RecDoc.create(wjnr:row[3],riqi:row[4],from:row[2],from_code:row[8],year:row[9],year_num:row[1],tiff:tiff1,doc_type:1)
+          yy = row[9]||"2000"
+          nn = row[1]||"0"
+          tiff1="1"+"-"+yy+"-"+nn
+          RecDoc.create(wjnr:row[3],riqi:row[4],from:row[2],from_code:row[8],year:row[9],year_num:row[1],tiff: tiff1,doc_type:1)
         else
-          tiff1="0"+"-"+row[8]+"-"+row[7] unless row[8].nil?||row[7].nil?||row[6].nil?
-          RecDoc.create(wjnr:row[4],riqi:row[2],from:row[1],from_code:row[3],year:row[8],year_num:row[7],tiff:tiff1,doc_type:0)
+          yy = row[8]||"2000"
+          nn = row[7]||"0"
+          tiff1="0"+"-"+yy+"-"+nn
+          RecDoc.create(wjnr:row[4],riqi:row[2],from:row[1],from_code:row[3],year:row[8],year_num:row[7],tiff: tiff1,doc_type:0)
         end
         p i
         p row
