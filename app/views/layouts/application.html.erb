@@ -17,7 +17,7 @@
 
         <div class="container">
             <% if logged_in? %>
-            <div class="row">
+            <div class="row diss">
                 <% flash.each do |key, value| %>
                 <%= content_tag(:div, value, class: "col-xs-6 col-xs-offset-3 alert alert-#{key}") %>
                 <% end %>
