@@ -8,17 +8,46 @@ class RecDocsController < ApplicationController
   # GET /rec_docs
   # GET /rec_docs.json
   def index
-    @q=RecDoc.ransack(params[:q])
-    p "-"*30
-    p params
-    p "-"*30
+    # @q = RecDoc.ransack(params[:q])
     page_limit = params[:page_limit]||10
-    if params[:q].nil?
-      @rec_docs = RecDoc.paginate(page: params[:page], per_page: page_limit).order(riqi: :desc)
-    else
-      @rec_docs=@q.result.paginate(page: params[:page], per_page: page_limit).order(created_at: :desc)
-    end
-    # p @rec_docs
+    my_key = ""
+    my_key = params[:q][:from_or_from_code_or_wjnr_cont] unless params[:q].nil?||params[:q][:from_or_from_code_or_wjnr_cont].nil?
+    p my_key
+    my_doc_type = {"收文":"doc_type = 0","信访":"doc_type = 1"}
+    my_doc_type.default =  ""
+    func_key = my_key.split(' ').first || ""
+    params[:q][:from_or_from_code_or_wjnr_cont] = my_key.split(' ',2)[1]||"" if func_key == "收文" || "信访" if !params[:q].nil?
+    @q = RecDoc.ransack(params[:q])
+    @rec_docs = @q.result.where(my_doc_type[func_key.to_sym]).paginate(page: params[:page], per_page: page_limit).order(year: :desc,year_num: :desc)
+    params[:q][:from_or_from_code_or_wjnr_cont] = my_key unless params[:q].nil?||params[:q][:from_or_from_code_or_wjnr_cont].nil?
+    @q = RecDoc.ransack(params[:q])
+    
+
+    # if params[:q].nil?
+      
+    #   p @q
+    #   @rec_docs = RecDoc.paginate(page: params[:page], per_page: page_limit).order(riqi: :desc)
+    # else      
+    #   case my_params.split(' ').first
+    #   when "收文"
+    #     p "sw"*30
+    #     params[:q][:from_or_from_code_or_wjnr_cont]=my_params.split(' ',2)[1]
+    #     @q = RecDoc.ransack(params[:q])
+    #     @rec_docs = @q.result.where("doc_type = 0").paginate(page: params[:page], per_page: page_limit).order(created_at: :desc)
+    #     params[:q][:from_or_from_code_or_wjnr_cont]=my_params
+    #   when "信访"
+    #     p "xf"*30
+    #     params[:q][:from_or_from_code_or_wjnr_cont]=my_params.split(' ',2)[1]
+    #     @q = RecDoc.ransack(params[:q])
+    #     @rec_docs = @q.result.where("doc_type = 1").paginate(page: params[:page], per_page: page_limit).order(created_at: :desc)
+    #     params[:q][:from_or_from_code_or_wjnr_cont]=my_params
+    #   else
+    #     p "qt"*30
+    #     @rec_docs = @q.result.paginate(page: params[:page], per_page: page_limit).order(created_at: :desc)
+    #   end
+    # end
+    # @q = RecDoc.ransack(params[:q])
+    # # p @rec_docs
   end
 
   # GET /rec_docs/1
