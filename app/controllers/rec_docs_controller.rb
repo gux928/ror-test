@@ -16,7 +16,9 @@ class RecDocsController < ApplicationController
     my_doc_type = {"收文":"doc_type = 0","信访":"doc_type = 1"}
     my_doc_type.default =  ""
     func_key = my_key.split(' ').first || ""
-    params[:q][:from_or_from_code_or_wjnr_cont] = my_key.split(' ',2)[1]||"" if func_key == "收文" || "信访" if !params[:q].nil?
+    # p params
+    params[:q][:from_or_from_code_or_wjnr_cont] = my_key.split(' ',2)[1]||"" if (func_key == "收文" || func_key == "信访") && !params[:q].nil?
+    # p params
     @q = RecDoc.ransack(params[:q])
     @rec_docs = @q.result.where(my_doc_type[func_key.to_sym]).paginate(page: params[:page], per_page: page_limit).order(year: :desc,year_num: :desc)
     params[:q][:from_or_from_code_or_wjnr_cont] = my_key unless params[:q].nil?||params[:q][:from_or_from_code_or_wjnr_cont].nil?
