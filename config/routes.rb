@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   get '/upload', to:'welcome#upload' ,as:'upload_csv'
   post '/upload', to:'welcome#import_csv'
+  post '/upload_new', to:'welcome#import_csv_new'
 
   get '/download_doc', to:'welcome#download_doc',as: 'download_doc'
   get '/download_fa', to:'welcome#download_fa',as: 'download_fa'

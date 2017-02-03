@@ -1,5 +1,22 @@
+<h1>警告，上传数据会清空原有数据，请做好备份后上传！</h1>
+
+
 <%= form_tag({action: :import_csv},multipart: true) do %>
 <%= file_field_tag 'csv_file' ,accept:'.csv'%>
 <%= select_tag(:file_type,options_for_select([['shoufawen','doc_file'],['zichan','asset_file']])) %>
 <%= submit_tag '上传' %>
 <% end %>
+
+<h1>------------------------------------------------------------------------</h1>
+
+<h1>------------------------------------------------------------------------</h1>
+
+<h1>------------------------------------------------------------------------</h1>
+
+<%= form_tag({action: :import_csv_new},multipart: true) do %>
+<%= file_field_tag 'csv_file' ,accept:'.csv'%>
+<%= select_tag(:file_type,options_for_select([['shoufawen','doc_file'],['zichan','asset_file']])) %>
+<%= submit_tag '上传' %>
+<% end %>
+
+

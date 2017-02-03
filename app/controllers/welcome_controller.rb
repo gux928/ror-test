@@ -32,6 +32,7 @@ class WelcomeController < ApplicationController
     path2=params[:csv_file].tempfile.path
     require 'csv'
     i=0
+    k=0
     p params[:file_type]
 
     if params[:file_type]=="doc_file"
@@ -54,8 +55,8 @@ class WelcomeController < ApplicationController
       end
     else
       CSV.foreach(path2) do |row|
-        i=i+1
-        p i
+        k=k+1
+        p k
         p row[6]
         a1=@my_code['belong_code'].key(row[6][0,1])
         a2=@my_code['main_class_code'].key(row[6][1,2])
@@ -71,8 +72,44 @@ class WelcomeController < ApplicationController
           p a4
           FixedAsset.create(number:a4,belongs_to:a1,main_class: a2,sub_class:a3,month_of_purchase:row[6][6,6],brand:row[0],model:row[1],unit_price:row[3],remarks:row[7]+row[8])
         end
+        break if k > 10
+      end
+      redirect_to fixed_assets_path
+    end
+  end
+
+
+  def import_csv_new
+    require 'yaml'
+    @my_code=YAML.load(File.open(File.expand_path(".")+"/code.yml"))
+    p @my_code['belong_code'].key('1')
+    path2=params[:csv_file].tempfile.path
+    require 'csv'
+    i=0
+    p params[:file_type]
+
+    if params[:file_type]=="doc_file"
+      RecDoc.delete_all()
+      CSV.foreach(path2) do |row|
+        i=i+1
+        p i
+        p row
+        RecDoc.create(doc_type:row[0],riqi:row[1],year:row[2],year_num:row[3],wjnr:row[4],from:row[5],from_code:row[6],tiff: row[7])
+      end
+      redirect_to rec_docs_path
+    else
+      FixedAsset.delete_all()
+      CSV.foreach(path2) do |row|
+        i=i+1
+        p i
+        p row[6]
+        a1=@my_code['belong_code'].key(row[0][0,1])
+        a2=@my_code['main_class_code'].key(row[0][1,2])
+        a3=@my_code['equipment_code'].key(row[0][3,3])
+        FixedAsset.create(number:row[0],belongs_to:row[1],main_class: row[2],sub_class:row[3],
+          month_of_purchase:row[5],brand:row[7],model:row[8],unit_price:row[11],remarks:row[9])
         break if i > 10
       end
-    end
+    end    
   end
 end
