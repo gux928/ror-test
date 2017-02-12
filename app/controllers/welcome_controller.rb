@@ -103,13 +103,13 @@ class WelcomeController < ApplicationController
         i=i+1
         p i
         p row[6]
-        a1=@my_code['belong_code'].key(row[0][0,1])
-        a2=@my_code['main_class_code'].key(row[0][1,2])
-        a3=@my_code['equipment_code'].key(row[0][3,3])
+        # a1=@my_code['belong_code'].key(row[0][0,1])
+        # a2=@my_code['main_class_code'].key(row[0][1,2])
+        # a3=@my_code['equipment_code'].key(row[0][3,3])
         FixedAsset.create(number:row[0],belongs_to:row[1],main_class: row[2],sub_class:row[3],
           month_of_purchase:row[5],brand:row[7],model:row[8],unit_price:row[11],remarks:row[9])
         break if i > 10
       end
-    end    
+    end
   end
 end
