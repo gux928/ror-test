@@ -41,8 +41,8 @@ next_check = ->
 
 next_check_2 = ->
   code=$("input#fixed_asset_number").val()
-  main_class_code=code.substr(7,2)
-  sub_class_code=code.substr(9)
+  main_class_code=code.substr(1,2)
+  sub_class_code=code.substr(3,3)
   console.log("code="+code)
   if main_class_code=="00" || sub_class_code=="000"
      console.log("step 2 checked,bu not ok!!!!")
@@ -119,7 +119,7 @@ $(".yy-label").click ->
 $(".mm-label").click ->
   console.log($(this).attr("class")+" index("+$(this).index()+") pressed")
   code=$("input#fixed_asset_number").val()
-  mm=$(this).children().val()/1+100+""
+  mm=$(this).children().val()*1+100+""
   new_code=code.substr(0,10)+mm.substr(1)+code.substr(-3)
   $("input#fixed_asset_number").val(new_code)
   mop=$("input#fixed_asset_month_of_purchase").val()
@@ -137,7 +137,7 @@ $(".quantity-label").click ->
     q_value=0
     $(".quantity-label.active").each ->
       console.log($(this).children().val()+"value=")
-      q_value=q_value+$(this).children().val()/1
+      q_value=q_value+$(this).children().val()*1
       $("input#fixed_asset_quantity").val(q_value)
       if q_value>0
         next_flag[3]=1
@@ -160,7 +160,7 @@ $(".main_class_label").click ->
   $(".sub_class_tab").hide()
   $(".sub_class_tab").eq(index).show()
   code=$("input#fixed_asset_number").val()
-  new_code=code.substr(0,7)+$(this).children().val()+"000"
+  new_code=code.substr(0,1)+$(this).children().val()+"000"+code.substr(-9)
   $("input#fixed_asset_number").val(new_code)
   console.log($(this).attr('key'))
   $("#fixed_asset_main_class").val($(this).attr('key'))
