@@ -24,6 +24,6 @@ class RecDoc < ApplicationRecord
   end
 
   def tiff
-    doc_type.to_s+"-"+year.to_s+"-"+year_num.to_s
+    doc_type.to_s+"-"+year.to_s+"-"+year_num.to_s+".tif"
   end
 end

@@ -11,6 +11,7 @@ class RecDocsController < ApplicationController
   def index
     # @q = RecDoc.ransack(params[:q])
     page_limit = params[:page_limit]||10
+    # my_key暂存搜索关键字
     my_key = ""
     my_key = params[:q][:from_or_from_code_or_wjnr_cont] unless params[:q].nil?||params[:q][:from_or_from_code_or_wjnr_cont].nil?
     p my_key
@@ -18,39 +19,14 @@ class RecDocsController < ApplicationController
     my_doc_type.default =  ""
     func_key = my_key.split(' ').first || ""
     # p params
-    params[:q][:from_or_from_code_or_wjnr_cont] = my_key.split(' ',2)[1]||"" if (func_key == "收文" || func_key == "信访") && !params[:q].nil?
+    if func_key == "收文" || func_key == "信访" #如果前缀收文或者信访关键字 则切分出来
+      params[:q][:from_or_from_code_or_wjnr_cont] = my_key.split(' ',2)[1]||""
+    end
     # p params
     @q = RecDoc.ransack(params[:q])
     @rec_docs = @q.result.where(my_doc_type[func_key.to_sym]).paginate(page: params[:page], per_page: page_limit).order(year: :desc,year_num: :desc)
     params[:q][:from_or_from_code_or_wjnr_cont] = my_key unless params[:q].nil?||params[:q][:from_or_from_code_or_wjnr_cont].nil?
     @q = RecDoc.ransack(params[:q])
-
-
-    # if params[:q].nil?
-
-    #   p @q
-    #   @rec_docs = RecDoc.paginate(page: params[:page], per_page: page_limit).order(riqi: :desc)
-    # else
-    #   case my_params.split(' ').first
-    #   when "收文"
-    #     p "sw"*30
-    #     params[:q][:from_or_from_code_or_wjnr_cont]=my_params.split(' ',2)[1]
-    #     @q = RecDoc.ransack(params[:q])
-    #     @rec_docs = @q.result.where("doc_type = 0").paginate(page: params[:page], per_page: page_limit).order(created_at: :desc)
-    #     params[:q][:from_or_from_code_or_wjnr_cont]=my_params
-    #   when "信访"
-    #     p "xf"*30
-    #     params[:q][:from_or_from_code_or_wjnr_cont]=my_params.split(' ',2)[1]
-    #     @q = RecDoc.ransack(params[:q])
-    #     @rec_docs = @q.result.where("doc_type = 1").paginate(page: params[:page], per_page: page_limit).order(created_at: :desc)
-    #     params[:q][:from_or_from_code_or_wjnr_cont]=my_params
-    #   else
-    #     p "qt"*30
-    #     @rec_docs = @q.result.paginate(page: params[:page], per_page: page_limit).order(created_at: :desc)
-    #   end
-    # end
-    # @q = RecDoc.ransack(params[:q])
-    # # p @rec_docs
   end
 
   # GET /rec_docs/1
@@ -67,8 +43,8 @@ class RecDocsController < ApplicationController
     @rec_doc.year=Time.now.year
     @rec_doc.year_num=RecDoc.where("year = ? AND doc_type = ?",Time.now.year,params[:type]).count+1
     @rec_doc.doc_type=params[:type]
-    p @rec_doc
-    @page_num=0
+    # p @rec_doc
+    # @page_num=0
   end
 
 
@@ -81,7 +57,7 @@ class RecDocsController < ApplicationController
     else
       @time=@rec_doc.riqi
     end
-    @png_exist=set_png
+    set_png
   end
 
   # GET /rec_docs/1/print
@@ -104,7 +80,12 @@ class RecDocsController < ApplicationController
 
     respond_to do |format|
       if @rec_doc.save
-        set_tiff rec_doc_params[:tiff].path unless rec_doc_params[:tiff].nil?
+        unless rec_doc_params[:tiff].nil?
+          require "FileUtils"
+          file_move_to = File.expand_path(".")+'/upload/'+@rec_doc.tiff
+          FileUtils.move rec_doc_params[:tiff].path,file_move_to
+          set_tiff rec_doc_params[:tiff].path
+        end
         p @rec_doc.tiff
         format.html { redirect_to @rec_doc, notice: '保存成功！' }
         format.json { render :show, status: :created, location: @rec_doc }
@@ -163,10 +144,9 @@ class RecDocsController < ApplicationController
     # png 文件保存在/approot/public/png/
     def set_png
       return if @rec_doc.photo.count > 0
-      tiff=@rec_doc.doc_type.to_s+"-"+@rec_doc.year.to_s+"-"+@rec_doc.year_num.to_s
-      real_file=File.expand_path(".")+'/upload/'+tiff+".tif"
+      real_file=File.expand_path(".")+'/upload/'+@rec_doc.tiff
       return if !File.exist?(real_file)
-      set_tiff real_filels
+      set_tiff real_file
       # return false if @rec_doc.tiff.nil?||!File.exist?(File.expand_path(".")+"/upload/"+@rec_doc.tiff+".tif")
       # tiff = ImageList.new(File.expand_path(".")+"/upload/"+@rec_doc.tiff+".tif")
       # @rec_doc.png_num=tiff.length
