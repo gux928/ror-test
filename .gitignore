@@ -29,6 +29,7 @@
 /assets.csv
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /pic_tmp
 *.sql
 database.yml
@@ -39,3 +40,6 @@ app/.DS_Store
 =======
 /pic_tmp/*
 >>>>>>> parent of 6448330... Merge branch 'iamges' of git.coding.net:guxiang/zggf-ror into iamges
+=======
+/pic_tmp/*
+>>>>>>> Revert "Revert "Merge branch 'iamges' of git.coding.net:guxiang/zggf-ror into iamges""
