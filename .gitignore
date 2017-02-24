@@ -28,6 +28,7 @@
 */*/.DS_Store
 /assets.csv
 <<<<<<< HEAD
+<<<<<<< HEAD
 /pic_tmp
 *.sql
 database.yml
@@ -35,3 +36,6 @@ app/.DS_Store
 =======
 /pic_tmp/*
 >>>>>>> Merge branch 'iamges' of git.coding.net:guxiang/zggf-ror into iamges
+=======
+/pic_tmp/*
+>>>>>>> parent of 6448330... Merge branch 'iamges' of git.coding.net:guxiang/zggf-ror into iamges
