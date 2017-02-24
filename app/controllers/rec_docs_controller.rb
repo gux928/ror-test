@@ -141,12 +141,24 @@ class RecDocsController < ApplicationController
     end
 
 
-    # png 文件保存在/approot/public/png/
+    # png 文件保存在/approot/public/pic_tmp/
     def set_png
-      return if @rec_doc.photo.count > 0
       real_file=File.expand_path(".")+'/upload/'+@rec_doc.tiff
-      return if !File.exist?(real_file)
-      set_tiff real_file
+      if @rec_doc.photo.count > 0     #如果数据库中有图片纪录
+        @rec_doc.photo.all().each do |pic|     #逐个检查文件是否存在
+          p "file  ----->"+pic.file_name
+          if !File.exist?(File.expand_path(".")+'/pic_tmp/'+pic.file_name)  #不存在则去查找tif文件
+            return if !File.exist?(real_file)
+            set_tiff real_file
+            return
+          else
+            next
+          end
+        end
+      elsif File.exist?(real_file)
+        set_tiff real_file
+      end
+
       # return false if @rec_doc.tiff.nil?||!File.exist?(File.expand_path(".")+"/upload/"+@rec_doc.tiff+".tif")
       # tiff = ImageList.new(File.expand_path(".")+"/upload/"+@rec_doc.tiff+".tif")
       # @rec_doc.png_num=tiff.length
@@ -171,7 +183,7 @@ class RecDocsController < ApplicationController
       end
       tiff = ImageList.new(filename)
       pages = tiff.length
-      folder = File.expand_path(".")+"/upload/"
+      folder = File.expand_path(".")+"/pic_tmp/"
       pre_image_name = @rec_doc.doc_type.to_s+"-"+@rec_doc.year.to_s+"-"+@rec_doc.year_num.to_s+"-"
       for i in 0...pages
         png_name = pre_image_name+i.to_s+".png"
