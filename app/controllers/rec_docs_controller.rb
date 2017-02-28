@@ -109,7 +109,12 @@ class RecDocsController < ApplicationController
     # p @rec_doc.tiff
     respond_to do |format|
       if @rec_doc.update(rec_doc_params)
-        set_tiff
+        unless rec_doc_params[:tiff].nil?
+          require "FileUtils"
+          file_move_to = File.expand_path(".")+'/upload/'+@rec_doc.tiff
+          FileUtils.move rec_doc_params[:tiff].path,file_move_to
+          set_tiff rec_doc_params[:tiff].path
+        end
         format.html { redirect_to @rec_doc, notice: '修改成功！' }
         format.json { render :show, status: :ok, location: @rec_doc }
       else
