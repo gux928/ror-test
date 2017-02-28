@@ -1,3 +1,4 @@
+# encoding: utf-8
 class FixedAssetsController < ApplicationController
   before_action :login_check
   before_action :set_fixed_asset, only: [:show, :edit, :update, :destroy,:upload,:save_pic]
