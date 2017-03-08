@@ -1,6 +1,7 @@
+# encoding: utf-8
 class FixedAsset < ApplicationRecord
     attr_accessor :quantity
-    
+
     has_many :photo, as: :imageable
 
     def self.to_csv(examples)
