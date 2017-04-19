@@ -80,7 +80,7 @@ class FixedAssetsController < ApplicationController
     for i in 1..fixed_asset_params[:quantity].to_i
       @fixed_asset = FixedAsset.new(fixed_asset_params)
       @fixed_asset.serial_number=(1000+i).to_s[1,3]
-      @fixed_asset.number=@fixed_asset.number+@fixed_asset.serial_number
+      @fixed_asset.number=@fixed_asset.number[0,12]+@fixed_asset.serial_number
       if @fixed_asset.save
           # format.html { redirect_to @fixed_asset, notice: 'Fixed asset was successfully created.' }
           # format.json { render :show, status: :created, location: @fixed_asset }
