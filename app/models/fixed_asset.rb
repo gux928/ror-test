@@ -1,5 +1,9 @@
+# encoding: utf-8
 class FixedAsset < ApplicationRecord
     attr_accessor :quantity
+
+    has_many :photo, as: :imageable
+
     def self.to_csv(examples)
       Rails.logger.info '「我要开始导出数据了」'
       CSV.generate do |csv|

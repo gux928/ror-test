@@ -25,6 +25,15 @@ class WelcomeController < ApplicationController
     end
   end
 
+  def download_db
+    dbfile = Time.now.to_i.to_s + '.dbb'
+    filename = Rails.root.join('upload',dbfile)
+    p filename
+    system "pg_dump  -U  postgres  -Fc -f #{filename} postgres"
+    send_file filename
+  end
+  
+
   def import_csv
     require 'yaml'
     @my_code=YAML.load(File.open(File.expand_path(".")+"/code.yml"))
@@ -103,13 +112,36 @@ class WelcomeController < ApplicationController
         i=i+1
         p i
         p row[6]
-        a1=@my_code['belong_code'].key(row[0][0,1])
-        a2=@my_code['main_class_code'].key(row[0][1,2])
-        a3=@my_code['equipment_code'].key(row[0][3,3])
+        # a1=@my_code['belong_code'].key(row[0][0,1])
+        # a2=@my_code['main_class_code'].key(row[0][1,2])
+        # a3=@my_code['equipment_code'].key(row[0][3,3])
         FixedAsset.create(number:row[0],belongs_to:row[1],main_class: row[2],sub_class:row[3],
           month_of_purchase:row[5],brand:row[7],model:row[8],unit_price:row[11],remarks:row[9])
         break if i > 10
       end
-    end    
+    end
   end
+
+  def import_db
+    p params[:csv_file].tempfile.path
+    system "pg_restore  -U  postgres -d postgres #{params[:csv_file].tempfile.path} -c"
+    redirect_to root_path    
+  end
+
+  def test_func
+    p "begin!!!"*30
+    p Rails.root
+    p File.path('./upload/db.dbb')
+    dbfile = Time.now.to_i.to_s + '.dbb'
+    filename = Rails.root.join('upload',dbfile)
+    p filename
+    system "pg_dump  -U  postgres  -Fc -f #{filename} postgres"
+    # system "pg_restore  -U  postgres -d postgres dbb -c"
+    # send_file filename
+    p "ok!!!"*30
+    render plain: "okokok"
+  end
+  
+
+
 end

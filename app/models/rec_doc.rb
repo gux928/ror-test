@@ -1,9 +1,14 @@
+# encoding: utf-8
 class RecDoc < ApplicationRecord
+
+  attr_accessor :tiff
   validates  :from, presence:  {message: "文件来源没有输入！"}
   validates_presence_of :wjnr, message:"文件内容没有输入！"
   # validates :year_num, uniqueness: { scope: [:year,:doc_type]
   #   message: "编号不可重复！"}
   validates_uniqueness_of :year_num, scope: [:year, :doc_type]
+
+  has_many :photo, as: :imageable
 
   require 'csv'
 
@@ -16,5 +21,9 @@ class RecDoc < ApplicationRecord
         csv << [item.doc_type,item.riqi,item.year,item.year_num,item.wjnr,item.from,item.from_code,item.tiff] #数据内容
       end
     end
+  end
+
+  def tiff
+    doc_type.to_s+"-"+year.to_s+"-"+year_num.to_s+".tif"
   end
 end
