@@ -25,6 +25,15 @@ class WelcomeController < ApplicationController
     end
   end
 
+  def download_db
+    dbfile = Time.now.to_i.to_s + '.dbb'
+    filename = Rails.root.join('upload',dbfile)
+    p filename
+    system "pg_dump  -U  postgres  -Fc -f #{filename} postgres"
+    send_file filename
+  end
+  
+
   def import_csv
     require 'yaml'
     @my_code=YAML.load(File.open(File.expand_path(".")+"/code.yml"))
@@ -112,4 +121,27 @@ class WelcomeController < ApplicationController
       end
     end
   end
+
+  def import_db
+    p params[:csv_file].tempfile.path
+    system "pg_restore  -U  postgres -d postgres #{params[:csv_file].tempfile.path} -c"
+    redirect_to root_path    
+  end
+
+  def test_func
+    p "begin!!!"*30
+    p Rails.root
+    p File.path('./upload/db.dbb')
+    dbfile = Time.now.to_i.to_s + '.dbb'
+    filename = Rails.root.join('upload',dbfile)
+    p filename
+    system "pg_dump  -U  postgres  -Fc -f #{filename} postgres"
+    # system "pg_restore  -U  postgres -d postgres dbb -c"
+    # send_file filename
+    p "ok!!!"*30
+    render plain: "okokok"
+  end
+  
+
+
 end

@@ -36,26 +36,29 @@ class FixedAssetsController < ApplicationController
   end
 
   def save_pic
+    p "*"*50
+    p params
+    p "*"*50
     p params[:file].tempfile.path
-    my_path=File.expand_path(".")+"/public/fixed_assets_pic/"+@fixed_asset.number
-    if @fixed_asset.photo.nil?
-      @fixed_asset.photo=1
-      Dir.mkdir(my_path) if File.exist?(my_path)
-    else
-      @fixed_asset.photo=0 if @fixed_asset.photo.to_i>1000
-      @fixed_asset.photo=@fixed_asset.photo.to_i+1
-    end
-    @fixed_asset.save
-    uploaded_io=params[:file]
-    real_file=my_path+"/"+@fixed_asset.photo.to_s+File.extname(params[:file].original_filename)
-    File.open(real_file,'wb') do |file|
-      file.write(uploaded_io.read)
-    end
-    my_dir=Dir.open(my_path)
-    p Dir.entries(my_path)
-    my_dir.each do |filename|
-      p filename
-    end
+    p "*"*50
+    p @fixed_asset
+    # my_dir=File.expand_path(".")+"/upload"
+    # Dir.mkdir(my_dir) if !File.exist?(my_dir)
+    # uploaded_io = params[:file]
+    png_name = @fixed_asset.number + "-" +  Time.now.to_i.to_s + "-" + params[:file].original_filename
+    real_file = File.expand_path(".")+"/upload/" + png_name
+    p File.exist?(params[:file].tempfile.path)
+    require 'fileutils'
+    FileUtils.move params[:file].tempfile.path , real_file
+    @fixed_asset.photo.create(file_name: png_name)
+    # File.open(real_file,'wb') do |file|
+    #   file.write(uploaded_io.read)
+    # end
+    # my_dir=Dir.open(my_path)
+    # p Dir.entries(my_dir)
+    # my_dir.each do |filename|
+    #   p filename
+    # end
   end
 
   # GET /fixed_assets/new

@@ -109,7 +109,7 @@ class RecDocsController < ApplicationController
     # p @rec_doc.tiff
     respond_to do |format|
       if @rec_doc.update(rec_doc_params)
-        unless rec_doc_params[:tiff].nil?
+        if !rec_doc_params[:tiff].nil?
           require "FileUtils"
           file_move_to = File.expand_path(".")+'/upload/'+@rec_doc.tiff
           FileUtils.move rec_doc_params[:tiff].path,file_move_to
@@ -152,12 +152,12 @@ class RecDocsController < ApplicationController
       if @rec_doc.photo.count > 0     #如果数据库中有图片纪录
         @rec_doc.photo.all().each do |pic|     #逐个检查文件是否存在
           p "file  ----->"+pic.file_name
-          if !File.exist?(File.expand_path(".")+'/pic_tmp/'+pic.file_name)  #不存在则去查找tif文件
-            return if !File.exist?(real_file)
-            set_tiff real_file
-            return
-          else
+          if File.exist?(File.expand_path(".")+'/pic_tmp/'+pic.file_name)  #不存在则去查找tif文件
             next
+          else
+            @rec_doc.photo.delete_all()
+            set_tiff real_file if File.exist?(real_file)
+            return
           end
         end
       elsif File.exist?(real_file)
@@ -188,7 +188,7 @@ class RecDocsController < ApplicationController
       end
       tiff = ImageList.new(filename)
       pages = tiff.length
-      folder = File.expand_path(".")+"/pic_tmp/"
+      folder = File.expand_path(".")+"/upload/"
       pre_image_name = @rec_doc.doc_type.to_s+"-"+@rec_doc.year.to_s+"-"+@rec_doc.year_num.to_s+"-"
       for i in 0...pages
         png_name = pre_image_name+i.to_s+".png"

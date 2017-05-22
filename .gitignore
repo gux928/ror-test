@@ -31,6 +31,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /pic_tmp
 *.sql
 database.yml
@@ -46,3 +47,8 @@ app/.DS_Store
 >>>>>>> Revert "Revert "Merge branch 'iamges' of git.coding.net:guxiang/zggf-ror into iamges""
 =======
 >>>>>>> Revert "Merge branch 'iamges' of git.coding.net:guxiang/zggf-ror into iamges"
+=======
+/pic_tmp
+*.sql
+database.yml
+>>>>>>> 新增数据库导出、导入
