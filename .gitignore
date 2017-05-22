@@ -27,6 +27,9 @@
 */.DS_Store
 */*/.DS_Store
 /assets.csv
+<<<<<<< HEAD
 /pic_tmp
 *.sql
 database.yml
+=======
+>>>>>>> 8330323a4f0cac8938fc1e1b6c37bb653ba151f5
