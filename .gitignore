@@ -27,4 +27,6 @@
 */.DS_Store
 */*/.DS_Store
 /assets.csv
-/pic_tmp/*
+/pic_tmp
+*.sql
+database.yml

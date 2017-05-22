@@ -36,26 +36,29 @@ class FixedAssetsController < ApplicationController
   end
 
   def save_pic
+    p "*"*50
+    p params
+    p "*"*50
     p params[:file].tempfile.path
-    my_path=File.expand_path(".")+"/public/fixed_assets_pic/"+@fixed_asset.number
-    if @fixed_asset.photo.nil?
-      @fixed_asset.photo=1
-      Dir.mkdir(my_path) if File.exist?(my_path)
-    else
-      @fixed_asset.photo=0 if @fixed_asset.photo.to_i>1000
-      @fixed_asset.photo=@fixed_asset.photo.to_i+1
-    end
-    @fixed_asset.save
-    uploaded_io=params[:file]
-    real_file=my_path+"/"+@fixed_asset.photo.to_s+File.extname(params[:file].original_filename)
-    File.open(real_file,'wb') do |file|
-      file.write(uploaded_io.read)
-    end
-    my_dir=Dir.open(my_path)
-    p Dir.entries(my_path)
-    my_dir.each do |filename|
-      p filename
-    end
+    p "*"*50
+    p @fixed_asset
+    # my_dir=File.expand_path(".")+"/upload"
+    # Dir.mkdir(my_dir) if !File.exist?(my_dir)
+    # uploaded_io = params[:file]
+    png_name = @fixed_asset.number + "-" +  Time.now.to_i.to_s + "-" + params[:file].original_filename
+    real_file = File.expand_path(".")+"/upload/" + png_name
+    p File.exist?(params[:file].tempfile.path)
+    require 'fileutils'
+    FileUtils.move params[:file].tempfile.path , real_file
+    @fixed_asset.photo.create(file_name: png_name)
+    # File.open(real_file,'wb') do |file|
+    #   file.write(uploaded_io.read)
+    # end
+    # my_dir=Dir.open(my_path)
+    # p Dir.entries(my_dir)
+    # my_dir.each do |filename|
+    #   p filename
+    # end
   end
 
   # GET /fixed_assets/new
@@ -80,7 +83,7 @@ class FixedAssetsController < ApplicationController
     for i in 1..fixed_asset_params[:quantity].to_i
       @fixed_asset = FixedAsset.new(fixed_asset_params)
       @fixed_asset.serial_number=(1000+i).to_s[1,3]
-      @fixed_asset.number=@fixed_asset.number+@fixed_asset.serial_number
+      @fixed_asset.number=@fixed_asset.number[0,12]+@fixed_asset.serial_number
       if @fixed_asset.save
           # format.html { redirect_to @fixed_asset, notice: 'Fixed asset was successfully created.' }
           # format.json { render :show, status: :created, location: @fixed_asset }
