@@ -29,7 +29,7 @@ class WelcomeController < ApplicationController
     dbfile = Time.now.to_i.to_s + '.dbb'
     filename = Rails.root.join('upload',dbfile)
     p filename
-    system "pg_dump  -U  postgres  -Fc -f #{filename} postgres"
+    system "pg_dump -Fc -f #{filename}"
     send_file filename
   end
   
