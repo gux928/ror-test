@@ -84,7 +84,3 @@ test:
 #
 production:
   url: <%= ENV['DATABASE_URL'] %>
-  # <<: *default
-  # database: test-pg_production
-  # username: zggf
-  # password: zggf
