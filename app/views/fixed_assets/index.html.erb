@@ -1,54 +1,51 @@
-<!-- <p id="notice"><%= notice %></p> -->
-
 <%= search_form_for @q do |f| %>
 <div class="row">
-    <div class="form-group col-xs-6 col-xs-offset-2">
-        <%= f.search_field :number_or_belongs_to_or_main_class_or_sub_class_or_brand_or_model_or_unit_price_or_user_or_remarks_cont,class:"form-control",placeholder:"在此输入您要搜索的关键字" %>
-    </div>
-    <button type="submit" class="btn btn-deault col-md-2 ">搜索</button>
+  <div class="form-group col-xs-6 col-xs-offset-2">
+    <%= f.search_field :number_or_belongs_to_or_main_class_or_sub_class_or_brand_or_model_or_unit_price_or_user_or_remarks_cont,class:"form-control",placeholder:"在此输入您要搜索的关键字" %>
+  </div>
+  <button type="submit" class="btn btn-deault col-md-2 ">搜索</button>
 </div>
 <% end %>
 <div class="row text-center">
-    <!-- <%= will_paginate @rec_docs %> -->
-    <%= will_paginate @fixed_assets, renderer: BootstrapPagination::Rails %>
+  <!-- <%= will_paginate @rec_docs %> -->
+  <%= will_paginate @fixed_assets, renderer: BootstrapPagination::Rails %>
 </div>
 
 <table class="table table-striped text-center">
   <thead>
-      <tr >
-          <th class="text-center col-xs-2"><%= sort_link(@q, :number,"资产编号") %></th>
-          <th class="text-center col-xs-1"><%= sort_link(@q, :belongs_to,"购置单位") %></th>
-          <th class="text-center col-xs-1"><%= sort_link(@q, :month_of_purchase,"购置时间") %></th>
-          <th class="text-center col-xs-1"><%= sort_link(@q, :main_class,"大类") %></th>
-          <th class="text-center col-xs-1"><%= sort_link(@q, :sub_class,"小类") %></th>
-          <th class="text-center col-xs-1"><%= sort_link(@q, :brand,"品牌") %></th>
-          <th class="text-center col-xs-1"><%= sort_link(@q, :model,"型号") %></th>
-          <th class="text-center col-xs-1"><%= sort_link(@q, :unit_price,"价格") %></th>
-          <th class="text-center col-xs-1"><%= sort_link(@q, :user,"使用人") %></th>
-          <th class="text-center col-xs-1">备注</th>
-      </tr>
+    <tr >
+      <th class="text-center col-xs-2"><%= sort_link(@q, :number,"资产编号") %></th>
+      <th class="text-center col-xs-1"><%= sort_link(@q, :belongs_to,"购置单位") %></th>
+      <th class="text-center col-xs-1"><%= sort_link(@q, :month_of_purchase,"购置时间") %></th>
+      <th class="text-center col-xs-1"><%= sort_link(@q, :main_class,"大类") %></th>
+      <th class="text-center col-xs-1"><%= sort_link(@q, :sub_class,"小类") %></th>
+      <th class="text-center col-xs-1"><%= sort_link(@q, :brand,"品牌") %></th>
+      <th class="text-center col-xs-1"><%= sort_link(@q, :model,"型号") %></th>
+      <th class="text-center col-xs-1"><%= sort_link(@q, :unit_price,"价格") %></th>
+      <th class="text-center col-xs-1"><%= sort_link(@q, :user,"使用人") %></th>
+      <th class="text-center col-xs-1">备注</th>
+    </tr>
   </thead>
 
   <tbody>
     <% @fixed_assets.each do |fixed_asset| %>
-      <tr>
-        <td><%= link_to fixed_asset.number, fixed_asset %></td>
-        <td><%= fixed_asset.belongs_to %></td>
-        <td><%= fixed_asset.month_of_purchase[0,4]+"年"+fixed_asset.month_of_purchase[4,2]+"月" if !fixed_asset.month_of_purchase.nil? %></td>
-        <td><%= fixed_asset.main_class %></td>
-        <td><%= fixed_asset.sub_class %></td>
-        <td><%= fixed_asset.brand %></td>
-        <td><%= fixed_asset.model %></td>
-        <td><%= fixed_asset.unit_price %></td>
-        <td><%= fixed_asset.user %></td>
-        <td><%= fixed_asset.remarks %></td>
-      </tr>
+    <tr>
+      <td><%= link_to fixed_asset.number, fixed_asset %></td>
+      <td><%= fixed_asset.belongs_to %></td>
+      <td><%= fixed_asset.month_of_purchase[0,4]+"年"+fixed_asset.month_of_purchase[4,2]+"月" if !fixed_asset.month_of_purchase.nil? %></td>
+      <td><%= fixed_asset.main_class %></td>
+      <td><%= fixed_asset.sub_class %></td>
+      <td><%= fixed_asset.brand %></td>
+      <td><%= fixed_asset.model %></td>
+      <td><%= fixed_asset.unit_price %></td>
+      <td><%= fixed_asset.user %></td>
+      <td><%= fixed_asset.remarks %></td>
+    </tr>
     <% end %>
   </tbody>
 </table>
 
-
 <div class="row text-center">
-    <!-- <%= will_paginate @rec_docs %> -->
-    <%= will_paginate @fixed_assets, renderer: BootstrapPagination::Rails %>
+  <!-- <%= will_paginate @rec_docs %> -->
+  <%= will_paginate @fixed_assets, renderer: BootstrapPagination::Rails %>
 </div>

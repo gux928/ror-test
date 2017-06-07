@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="col-xs-12 col-md-8 col-md-offset-2">
+    <%= image_tag photo_path @photo %>
+  </div>
+</div>
+<h1></h1>
+<div class="row">
+  <%= link_to '删除', url_for(action: :destroy,id: @photo.id),method: :delete, data: {confirm: "确认删除此图片?"} ,class:"btn btn-danger col-xs-1 col-xs-offset-4"%>
+  <%= link_to '返回', :back ,class:"btn btn-primary col-xs-1 col-xs-offset-2"%>
+</div>

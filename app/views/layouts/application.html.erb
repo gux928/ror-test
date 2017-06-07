@@ -1,39 +1,40 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>190号大院</title>
-        <%= csrf_meta_tags %>
-        <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-        <!-- <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %> -->
+  <head>
+    <title>190号大院</title>
+    <%= csrf_meta_tags %>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <!-- <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %> -->
 
-        <!-- <%= javascript_include_tag "fixed_assets.js" %> -->
-    </head>
+    <!-- <%= javascript_include_tag "fixed_assets.js" %> -->
+  </head>
 
-    <body>
-        <% if logged_in? %>
-        <%= render 'layouts/header' %>
-        <% end %>
+  <body>
+    <% if logged_in? %>
+    <%= render 'layouts/header' %>
+    <% end %>
 
-        <div class="container">
-            <% if logged_in? %>
-            <div class="row diss">
-                <% flash.each do |key, value| %>
-                <%= content_tag(:div, value, class: "col-xs-6 col-xs-offset-3 alert alert-#{key}") %>
-                <% end %>
-            </div>
-            <% end %>
-            <%= yield %>
+    <div class="container">
+      <% if logged_in? %>
+      <div class="row diss">
+        <%= flash_messages %>
+        <!-- <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, class: "alert alert-warning") %>
+        <% end %> -->
+      </div>
+      <% end %>
+      <%= yield %>
 
-        </div>
-        <%= yield :print %>
+    </div>
+    <%= yield :print %>
 
-        <footer>
-            <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-            <script src="//cdn.bootcss.com/jquery-ujs/1.2.2/rails.min.js"></script>
-            <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-            <%= yield :script %>
-        </footer>
-    </body>
+    <footer>
+      <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+      <script src="//cdn.bootcss.com/jquery-ujs/1.2.2/rails.min.js"></script>
+      <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <%= yield :script %>
+    </footer>
+  </body>
 
 </html>

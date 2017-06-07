@@ -1,25 +1,23 @@
-
-
 <div id="login-tab" class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3">
   <div class="row">
-      <% flash.each do |key, value| %>
+    <!-- <% flash.each do |key, value| %>
       <%= content_tag(:div, value, class: "col-xs-6 col-xs-offset-3 alert alert-#{key}") %>
-      <% end %>
+      <% end %> -->
+    <%= flash_messages %>
   </div>
-  <div class="col-md-11 col-md-offset-1">
-</div>
-<%= form_for(:session,url:login_path) do |f| %>
+  <div class="col-md-11 col-md-offset-1"></div>
+  <%= form_for(:session,url:login_path) do |f| %>
 
-<div class="form-group">
+  <div class="form-group">
     <%= f.label :手机号码（或短号） %>
     <%= f.text_field :phone ,class:"form-control"%>
-</div>
-<div class="form-group">
+  </div>
+  <div class="form-group">
     <%= f.label :密码 %>
     <%= f.password_field :password ,class:"form-control"%>
-</div>
-<div class="row text-center">
-<%= f.submit "登入" ,class: "btn btn-primary" %>
-</div>
-<% end %>
+  </div>
+  <div class="row text-center">
+    <%= f.submit "登入" ,class: "btn btn-primary" %>
+  </div>
+  <% end %>
 </div>

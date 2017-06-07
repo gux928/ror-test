@@ -1,15 +1,11 @@
-
-
 <link href="//cdn.bootcss.com/dropzone/4.3.0/min/dropzone.min.css" rel="stylesheet">
 <%= render 'form_edit', fixed_asset: @fixed_asset %>
 <% content_for :script do %>
 <script src="//cdn.bootcss.com/dropzone/4.3.0/min/dropzone.min.js"></script>
-<!-- <script src="//cdn.bootcss.com/dropzone/4.3.0/min/dropzone.js"></script> -->
+<!-- <script src="//cdn.bootcss.com/dropzone/4.3.0/min/dropzone.js"></script>
 <%= javascript_include_tag "fixed_assets.js" %>
-
 <script type="text/javascript">
     Dropzone.prototype.defaultOptions.dictDefaultMessage = "点击此处上传图片，或将需要上传的图片拖拽到此处！";
     Dropzone.prototype.defaultOptions.acceptedFiles = "image/*";
-
-</script>
+</script>-->
 <% end %>

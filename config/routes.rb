@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   resources :photos
   resources :fixed_assets
+  resources :users
+
+
   get '/login', to:'sessions#new'
   post '/login', to:'sessions#create'
   delete '/logout', to:'sessions#destroy'
@@ -20,9 +23,12 @@ Rails.application.routes.draw do
   get '/fixed_assets/:id/upload',to:'fixed_assets#upload',as: 'upload_fixed_assets'
   post '/fixed_assets/:id/upload',to:'fixed_assets#save_pic'
 
+
+  get '/photos/:id/delete',to:'photos#delete',as: 'delete_photo'
+  delete '/photos/:id', to:'photos#destroy', as: 'destroy_photo'
+
   get '/test_func',to:'welcome#test_func'
 
-  resources :users
   root 'welcome#index'
 
   # get 'rec_docs/:id/print',to: 'rec_docs#print',as: 'print_rec_doc'

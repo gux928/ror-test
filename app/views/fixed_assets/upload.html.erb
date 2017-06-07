@@ -1,20 +1,29 @@
-
-<!-- <form action="/fa_upload" class="dropzone">
-  <div class="fallback">
-    <input name="file" type="file" multiple />
-  </div>
-</form> -->
 <link href="//cdn.bootcss.com/dropzone/4.3.0/min/dropzone.min.css" rel="stylesheet">
-<%= form_tag({action: :save_pic}, multipart: true ,class: "dropzone",) do %>
-<div class="fallback">
-  <%= file_field_tag 'picture' %>
+<div class="row">
+  <div class="col-xs-8 col-xs-offset-2">
+    <h2>上传图片：</h2>
+  </div>
+  <div class="col-xs-8 col-xs-offset-2">
+    <%= form_tag({action: :save_pic}, multipart: true ,class: "dropzone",id: "dz_save_pic") do %>
+    <div class="fallback">
+      <%= file_field_tag 'picture' ,accept:'image/＊'%>
     </div>
-<% end %>
-
+    <% end %>
+  </div>
+  <div class="col-xs-8 col-xs-offset-2">
+    <h1></h1>
+  </div>
+  <div class="col-xs-6 col-xs-offset-2">
+    <%= link_to '完成' ,fixed_asset_path ,class: "btn btn-primary"  %>
+    <!-- <%= link_to '完成' ,{action: "show"} ,class: "btn"%> -->
+  </div>
+</div>
 
 <% content_for :script do %>
 <script src="//cdn.bootcss.com/dropzone/4.3.0/min/dropzone.min.js"></script>
-<!-- <script>
-  $("div#myId").dropzone();
-</script> -->
+<%= javascript_include_tag "fixed_assets.js" %>
+<script type="text/javascript">
+  Dropzone.prototype.defaultOptions.dictDefaultMessage = "点击此处上传图片，或将需要上传的图片拖拽到此处！";
+  Dropzone.prototype.defaultOptions.acceptedFiles = "image/*";
+</script>
 <% end %>

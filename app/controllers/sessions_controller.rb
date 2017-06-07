@@ -11,11 +11,11 @@ class SessionsController < ApplicationController
     p user
     if user && user.authenticate(params[:session][:password])
       p "ok!!"
-      flash[:danger] = user.name+",登入成功"
+      flash[:success] = user.name+",登入成功"
       log_in user
       redirect_back_or_index
     else
-      flash[:danger] = "用户名或者密码错误，请重试！"
+      flash[:error] = "用户名或者密码错误，请重试！"
       render 'new'
     end
   end
