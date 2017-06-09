@@ -6,8 +6,8 @@
     <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <!-- <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %> -->
-
     <!-- <%= javascript_include_tag "fixed_assets.js" %> -->
+    <%= yield :header_css %>
   </head>
 
   <body>

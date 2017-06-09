@@ -1,4 +1,7 @@
-<link href="//cdn.bootcss.com/dropzone/4.3.0/min/dropzone.min.css" rel="stylesheet">
+<% content_for :header_css do %>
+<%= stylesheet_link_tag "//cdn.bootcss.com/dropzone/4.3.0/min/dropzone.min.css" %>
+<!-- <link href="//cdn.bootcss.com/dropzone/4.3.0/min/dropzone.min.css" rel="stylesheet"> -->
+<% end %>
 <div class="row">
   <div class="col-xs-8 col-xs-offset-2">
     <h2>上传图片：</h2>
@@ -13,14 +16,16 @@
   <div class="col-xs-8 col-xs-offset-2">
     <h1></h1>
   </div>
-  <div class="col-xs-6 col-xs-offset-2">
-    <%= link_to '完成' ,fixed_asset_path ,class: "btn btn-primary"  %>
+  <div class="row">
+    <%= link_to '完成' ,fixed_asset_path ,class: "btn btn-primary col-xs-2 col-xs-offset-5"  %>
     <!-- <%= link_to '完成' ,{action: "show"} ,class: "btn"%> -->
   </div>
 </div>
 
 <% content_for :script do %>
-<script src="//cdn.bootcss.com/dropzone/4.3.0/min/dropzone.min.js"></script>
+<!-- <%= javascript_include_tag "dropzone.js" %> -->
+<!-- <script src="//cdn.bootcss.com/dropzone/4.3.0/dropzone.js"></script> -->
+<%= javascript_include_tag "//cdn.bootcss.com/dropzone/4.3.0/dropzone.js" %>
 <%= javascript_include_tag "fixed_assets.js" %>
 <script type="text/javascript">
   Dropzone.prototype.defaultOptions.dictDefaultMessage = "点击此处上传图片，或将需要上传的图片拖拽到此处！";
