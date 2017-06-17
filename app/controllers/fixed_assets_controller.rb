@@ -144,6 +144,6 @@ class FixedAssetsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def fixed_asset_params
-      params.require(:fixed_asset).permit(:serial, :number,:belongs_to,:main_class,:sub_class,:month_of_purchase,:brand,:model,:unit_price,:remarks,:quantity,:user)
+      params.require(:fixed_asset).permit(:state, :serial, :number,:belongs_to,:main_class,:sub_class,:month_of_purchase,:brand,:model,:unit_price,:remarks,:quantity,:user)
     end
 end

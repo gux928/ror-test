@@ -191,5 +191,10 @@ $("input#fixed_asset_brand,input#fixed_asset_model,input#fixed_asset_unit_price"
     console.log("input keypress")
     submit_check()
 
+# $(document).mouseup ->
+#     submit_check()
 
-submit_check()
+$(document).ready ->
+    setInterval () ->
+        submit_check()
+    , 100

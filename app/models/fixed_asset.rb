@@ -1,6 +1,8 @@
 # encoding: utf-8
 class FixedAsset < ApplicationRecord
     attr_accessor :quantity
+    validates :state, inclusion: { in: %w(使用 报废 停用未报废),message: "资产状态错误!"}
+    # validates :state, inclusion: { in: %w(small medium large),message: "%{value} is not a valid size" }
 
     has_many :photo, as: :imageable
 
