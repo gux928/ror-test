@@ -66,7 +66,7 @@
   </div>
   <div class="form-group col-xs-6 col-md-4">
     <%= f.label :设备状态 %>
-    <%= f.select :state, options_for_select( ["使用","报废","停用未报废"],@fixed_asset.state),  {prompt: false}, {class: "form-control"} %>
+    <%= f.select :state, options_for_select( ["使用","报废","停用未报废"],@fixed_asset.state),  {}, {class: "form-control"} %>
   </div>
   <div class="form-group col-xs-12 col-md-8 col-md-offset-2">
     <%= f.label :备注%>

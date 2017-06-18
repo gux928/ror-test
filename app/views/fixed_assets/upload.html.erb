@@ -7,7 +7,7 @@
     <h2>上传图片：</h2>
   </div>
   <div class="col-xs-8 col-xs-offset-2">
-    <%= form_tag({action: :save_pic}, multipart: true ,class: "dropzone",id: "dz_save_pic") do %>
+    <%= form_tag {action: :save_pic}, multipart: true ,class: "dropzone",id: "dz_save_pic" do %>
     <div class="fallback">
       <%= file_field_tag 'picture' ,accept:'image/＊'%>
     </div>
